@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Senha</title>
+    <script src="../js/recuperarSenha.js"></script>
+    <link rel="stylesheet" href="../css/recuperarSenha.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>RECUPERAR SENHA</h1>
+
+        <div class="input-group">
+            <label>Digite seu e-mail ou nome de usuário</label>
+            <i class="fa fa-user"></i>
+            <input type="text" id="emailOuUsuario">
+        </div>
+
+        <div class="input-group">
+            <label>Digite sua palavra-chave</label>
+            <i class="fa fa-key"></i>
+            <input type="password" id="palavraChave">
+        </div>
+
+        <div class="input-group">
+            <label>Criar nova senha</label>
+            <div class="password-input">
+                <i class="fa fa-lock"></i>
+                <input type="password" id="novaSenha">
+                <i class="fa fa-eye-slash toggle-password" data-target="novaSenha"></i>
+            </div>
+        </div>
+
+        <button id="entrarButton" class="login-button">Login</button>
+
+        <a href="login.html" class="back-link">Voltar para login</a>
+    </div>
+</body>
+</html>
