@@ -1,6 +1,6 @@
 body {
-    font-family: 'Georgia', serif;
-    background-color: #f3b25f;
+    font-family: Arial, sans-serif;
+    background-color: #fec56c;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,27 +9,45 @@ body {
     color: #333;
 }
 
+.logo-container {
+    position: absolute;
+    top: 30px;
+    left: 50px;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+    border-radius: 50%;
+}
+
 .container {
-    background-color: #fdf8dc;
-    padding: 60px 70px;
-    border-radius: 22px;
-    border: 3px solid #8b2e2e;
-    width: 520px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    background-color: #FFFADC;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    max-width: 400px;
+    width: 90%;
     text-align: center;
+    border: 2px solid #A0522D;
 }
 
 h1 {
-    color: #111;
-    margin-bottom: 50px;
-    font-size: 36px;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 26px;
     font-weight: bold;
     text-transform: uppercase;
 }
 
 .input-group {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     text-align: left;
+}
+
+.input-group input::placeholder {
+    color: #FFFADC;
+    opacity: 1;
 }
 
 .input-group label {
@@ -47,51 +65,56 @@ h1 {
 
 .input-wrapper input {
     width: 100%;
-    padding: 18px 50px 18px 50px;
+    padding: 16px 16px 16px 40px;
     border: none;
-    border-radius: 10px;
-    background-color: #34585c;
-    color: #fff;
-    font-size: 18px;
+    border-radius: 6px;
+    background-color: #325862;
+    color: #FFFADC;
+    font-size: 16px;
 }
 
 .input-wrapper i {
     position: absolute;
-    font-size: 18px;
+    font-size: 16px;
     color: #FFFADC;
 }
 
 .input-wrapper .fa-user,
 .input-wrapper .fa-lock {
-    left: 18px;
+    left: 14px;
 }
 
 .input-wrapper .toggle-password {
-    right: 18px;
+    right: 14px;
     cursor: pointer;
 }
 
 .forgot-password {
     display: block;
     text-align: center;
-    margin: -5px 0 30px;
-    color: #8b2e2e;
+    font-weight: bold;
+    margin: -5px 0 25px;
+    color: #A0522D;
     text-decoration: none;
     font-size: 16px;
 }
 
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
 .login-button {
-    background-color: #34585c;
-    color: #fff;
+    background-color: #325862;
+    color: white;
     border: none;
     padding: 18px;
     width: 50%;
-    border-radius: 10px;
-    font-size: 20px;
+    border-radius: 6px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+    margin-bottom: 25px;
     transition: background-color 0.3s;
-    margin-bottom: 30px;
 }
 
 .login-button:hover {
@@ -100,13 +123,142 @@ h1 {
 
 .register-text {
     font-size: 16px;
-    color: #8b2e2e;
+    color: #A0522D;
+    line-height: 1.4;
     text-align: right;
+    padding-top: 16px;
 }
 
 .register-text a {
-    color: #8b2e2e;
+    color: #A0522D;
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+/* Contêiner para notificações (toasts) */
+/* Toast Container */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* Estilo dos toasts */
+.toast {
+    background-color: #f44336; /* Vermelho para mensagens de erro */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: fadeIn 0.5s, fadeOut 0.5s 4.5s;
+}
+
+.toast.success {
+    background-color: #4CAF50; /* Verde para mensagens de sucesso */
+}
+
+.toast i {
+    margin-right: 10px;
+}
+
+.toast .toast-close {
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 15px;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .input-group label,
+    .input-wrapper input {
+        font-size: 14px;
+    }
+
+    .login-button {
+        width: 75%;
+        font-size: 14px;
+        padding: 14px;
+    }
+
+    .register-text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 25px 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin-bottom: 18px;
+    }
+
+    .input-group label,
+    .input-wrapper input {
+        font-size: 12px;
+        padding: 12px 12px 12px 30px;
+    }
+
+    .input-wrapper i {
+        font-size: 14px;
+        left: 10px;
+    }
+
+    .input-wrapper .toggle-password {
+        right: 10px;
+    }
+
+    .login-button {
+        width: 85%;
+        font-size: 12px;
+        padding: 12px;
+    }
+
+    .register-text {
+        font-size: 12px;
+    }
 }

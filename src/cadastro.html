@@ -1,54 +1,65 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar-se</title>
-    <link rel="stylesheet" href="../css/cadastro.css" />
+    <link rel="stylesheet" href="../css/cadastro.css">
     <script src="../js/cadastro.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="shortcut icon" href="./img/logo-sem-fundo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+    <div class="logo-container">
+        <img src="../src/img/imgLogo.jpg" alt="Logo" class="logo">
+    </div>
     <div class="container">
         <h1>CADASTRAR-SE</h1>
 
         <div class="input-group">
-            <label>Nome de usuário</label>
+            <label for="username">Nome de usuário</label>
             <i class="fa fa-user"></i>
-            <input type="text" id="username" />
+            <input type="text" id="username" placeholder="Digite seu nome de usuário">
         </div>
 
         <div class="input-group">
-            <label>E-mail</label>
+            <label for="email">E-mail</label>
             <i class="fa fa-envelope"></i>
-            <input type="email" id="email" />
+            <input type="email" id="email" placeholder="Digite seu e-mail">
         </div>
 
         <div class="input-group">
-            <label>Telefone</label>
+            <label for="phone">Telefone</label>
             <i class="fa fa-phone"></i>
-            <input type="tel" id="phone" />
+            <input type="tel" id="phone" placeholder="Digite seu telefone">
         </div>
 
         <div class="input-group">
-            <label>Crie uma senha</label>
+            <label for="password">Crie uma senha</label>
             <i class="fa fa-lock"></i>
-            <input type="password" id="password" />
+            <input type="password" id="password" placeholder="Digite sua senha">
             <i class="fa fa-eye toggle-password" data-target="password"></i>
         </div>
 
         <div class="input-group">
-            <label>Confirmar senha</label>
+            <label for="confirmPassword">Confirmar senha</label>
             <i class="fa fa-lock"></i>
-            <input type="password" id="confirmPassword" />
+            <input type="password" id="confirmPassword" placeholder="Confirme sua senha">
             <i class="fa fa-eye toggle-password" data-target="confirmPassword"></i>
+        </div>
+
+        <div class="input-group">
+            <label for="palavraChave">Crie uma palavra-chave</label>
+            <i class="fa fa-key"></i>
+            <input type="password" id="palavraChave" placeholder="Digite sua palavra-chave">
+            <i class="fa fa-eye toggle-password" data-target="palavraChave"></i>
         </div>
 
         <button id="createAccountButton" class="login-button">Criar conta</button>
 
         <div class="register-text">
-            Já tem uma conta?<br />
-            <a href="login.html">Fazer login</a>
+            Já tem uma conta?<br>
+            <a href="../index.html">Faça login</a>
         </div>
     </div>
 </body>

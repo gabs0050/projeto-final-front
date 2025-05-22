@@ -1,87 +1,183 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const togglePasswordButtons = document.querySelectorAll('.toggle-password');
-    const entrarButton = document.getElementById('entrarButton');
-    const emailOuUsuarioInput = document.getElementById('emailOuUsuario');
-    const palavraChaveInput = document.getElementById('palavraChave');
-    const novaSenhaInput = document.getElementById('novaSenha');
-    const voltarLogin = document.querySelector('.back-link'); // Seleciona o link pela classe
+'use strict'
 
-    // Dados mockados para simulação
-    const usuariosCadastrados = [
-        {
-            email: "exemplo@gmail.com",
-            usuario: "user123",
-            palavraChave: "palavrachave",
-            senha: "senhaAntiga123"
-        }
-    ];
+document.addEventListener('DOMContentLoaded', function () {
+    const togglePasswordButtons = document.querySelectorAll('.toggle-password')
+    const entrarButton = document.getElementById('entrarButton')
+    const emailOuUsuarioInput = document.getElementById('emailOuUsuario')
+    const palavraChaveInput = document.getElementById('palavraChave')
+    const novaSenhaInput = document.getElementById('novaSenha')
+    const voltarLogin = document.querySelector('.back-link')
 
-    // Função para mostrar/ocultar senha
-    togglePasswordButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const targetInput = document.getElementById(targetId);
+    // Criação do container de toast
+    const toastContainer = document.createElement('div')
+    toastContainer.className = 'toast-container'
+    document.body.appendChild(toastContainer)
 
-            if (targetInput.type === 'password') {
-                targetInput.type = 'text';
-                this.classList.remove('fa-eye-slash');
-                this.classList.add('fa-eye');
-            } else {
-                targetInput.type = 'password';
-                this.classList.remove('fa-eye');
-                this.classList.add('fa-eye-slash');
+    function showToast(message, type = 'error') {
+        const toast = document.createElement('div')
+        toast.className = `toast ${type}`
+
+        const icon = document.createElement('i')
+        icon.className = type === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle'
+
+        const messageDiv = document.createElement('div')
+        messageDiv.className = 'toast-message'
+        messageDiv.textContent = message
+
+        const closeButton = document.createElement('span')
+        closeButton.className = 'toast-close'
+        closeButton.innerHTML = '&times'
+
+        toast.appendChild(icon)
+        toast.appendChild(messageDiv)
+        toast.appendChild(closeButton)
+
+        toastContainer.appendChild(toast)
+
+        closeButton.addEventListener('click', () => {
+            toast.style.animation = 'fadeOut 0.3s ease-in-out forwards'
+            setTimeout(() => {
+                if (toastContainer.contains(toast)) {
+                    toastContainer.removeChild(toast)
+                }
+            }, 300)
+        })
+
+        setTimeout(() => {
+            toast.style.animation = 'fadeOut 0.3s ease-in-out forwards'
+            setTimeout(() => {
+                if (toastContainer.contains(toast)) {
+                    toastContainer.removeChild(toast)
+                }
+            }, 300)
+        }, 5000)
+    }
+
+    // Função para buscar usuários do endpoint
+    async function fetchUsuarios() {
+        try {
+            const response = await fetch('http://localhost:8080/v1/controle-receita/usuario')
+            if (!response.ok) {
+                throw new Error('Erro ao buscar usuários.')
             }
-        });
-    });
+            const data = await response.json()
+            return data.games || []
+        } catch (error) {
+            console.error(error)
+            showToast('Erro ao conectar com o servidor. Tente novamente mais tarde.')
+            return []
+        }
+    }
 
-    // Função para validar recuperação de senha
-    function validarRecuperacaoSenha() {
-        const emailOuUsuario = emailOuUsuarioInput.value.trim();
-        const palavraChave = palavraChaveInput.value;
-        const novaSenha = novaSenhaInput.value;
+    // Função para atualizar a senha do usuário
+    async function atualizarSenha(usuarioId, dadosAtualizados) {
+        try {
+            const response = await fetch(`http://localhost:8080/v1/controle-receita/usuario/${usuarioId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dadosAtualizados)
+            })
+
+            if (!response.ok) {
+                throw new Error('Erro ao atualizar a senha.')
+            }
+
+            return true
+        } catch (error) {
+            console.error(error)
+            showToast('Erro ao atualizar a senha. Tente novamente mais tarde.')
+            return false
+        }
+    }
+
+    // Função para validar e processar a recuperação de senha
+    async function validarRecuperacaoSenha() {
+        const emailOuUsuario = emailOuUsuarioInput.value.trim()
+        const palavraChave = palavraChaveInput.value
+        const novaSenha = novaSenhaInput.value
 
         // Verifica se todos os campos foram preenchidos
         if (!emailOuUsuario || !palavraChave || !novaSenha) {
-            alert("Por favor, preencha todos os campos.");
-            return false;
+            showToast('Por favor, preencha todos os campos.')
+            return false
         }
+
+        const usuarios = await fetchUsuarios()
 
         // Verifica se as credenciais correspondem
-        const usuarioValido = usuariosCadastrados.find(user =>
-            (user.email === emailOuUsuario || user.usuario === emailOuUsuario) &&
-            user.palavraChave === palavraChave
-        );
+        const usuarioValido = usuarios.find(user =>
+            (user.email === emailOuUsuario || user.nome_usuario === emailOuUsuario) &&
+            user.palavra_chave === palavraChave
+        )
 
-        if (usuarioValido) {
-            // Atualiza a senha no mock (simulando atualização no banco de dados)
-            usuarioValido.senha = novaSenha;
-            return true;
-        } else {
-            return false;
+        if (!usuarioValido) {
+            showToast('Credenciais inválidas. Verifique seu e-mail/nome de usuário e palavra-chave.')
+            return false
         }
+
+        // Atualiza a senha do usuário
+        const dadosAtualizados = {
+            nome_usuario: usuarioValido.nome_usuario,
+            email: usuarioValido.email,
+            senha: novaSenha,
+            palavra_chave: usuarioValido.palavra_chave,
+            foto_perfil: usuarioValido.foto_perfil,
+            data_criacao: usuarioValido.data_criacao.split('T')[0],
+            data_atualizacao: new Date().toISOString().split('T')[0]
+        }
+
+        if (await atualizarSenha(usuarioValido.id, dadosAtualizados)) {
+            showToast('Senha alterada com sucesso!', 'success')
+            return true
+        }
+
+        return false
     }
 
     // Evento do botão Entrar
-    entrarButton.addEventListener('click', function(e) {
-        e.preventDefault();
+    entrarButton.addEventListener('click', async function (e) {
+        e.preventDefault()
 
-        if (validarRecuperacaoSenha()) {
-            alert("Senha alterada com sucesso!");
+        if (await validarRecuperacaoSenha()) {
             // Simula redirecionamento após 1 segundo
             setTimeout(() => {
-                window.location.href = 'login.html'; // Página de login (pode ser ajustada)
-            }, 1000);
-        } else {
-            alert("Credenciais inválidas. Verifique seu e-mail/nome de usuário e palavra-chave.");
+                window.location.href = '../index.html'
+            }, 1500)
         }
-    });
+    })
 
     // Evento do link Voltar para login
     if (voltarLogin) {
-        voltarLogin.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Simula redirecionamento
-            window.location.href = 'login.html'; // Página de login (pode ser ajustada)
-        });
+        voltarLogin.addEventListener('click', function (e) {
+            e.preventDefault()
+            window.location.href = '../index.html'
+        })
     }
-});
+
+    // Função para mostrar/ocultar senha
+    togglePasswordButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const targetId = this.getAttribute('data-target')
+            const targetInput = document.getElementById(targetId)
+
+            if (targetInput.type === 'password') {
+                targetInput.type = 'text'
+                this.classList.remove('fa-eye-slash')
+                this.classList.add('fa-eye')
+            } else {
+                targetInput.type = 'password'
+                this.classList.remove('fa-eye')
+                this.classList.add('fa-eye-slash')
+            }
+        })
+    })
+
+    // Permitir que o botão seja acionado com Enter
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            entrarButton.click()
+        }
+    })
+})

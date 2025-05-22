@@ -5,18 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fazer Login</title>
     <link rel="stylesheet" href="../css/login.css">
-    <script src="../js/login.js"></script>
+    <script src="../js/login.js" defer></script>
+    <link rel="shortcut icon" href="./src/img/logo-sem-fundo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+    <div class="logo-container">
+        <img src="../src/img/imgLogo.jpg" alt="Logo" class="logo">
+    </div>
     <div class="container">
         <h1>LOGIN</h1>
 
         <div class="input-group">
-            <label for="usuario">Digite seu usuário ou e-mail</label>
+            <label for="usuario">Usuário ou e-mail</label>
             <div class="input-wrapper">
                 <i class="fas fa-user"></i>
-                <input type="text" id="usuario" >
+                <input type="text" id="usuario" placeholder="Digite seu usuário ou e-mail">
             </div>
         </div>
 
@@ -24,18 +28,18 @@
             <label for="senha">Senha</label>
             <div class="input-wrapper">
                 <i class="fas fa-lock"></i>
-                <input type="password" id="senha">
+                <input type="password" id="senha" placeholder="Digite sua senha">
                 <i class="fas fa-eye toggle-password" id="toggleSenha"></i>
             </div>
         </div>
 
-        <a href="recuperarSenha.html" class="forgot-password">Esqueceu a senha?</a>
+        <a href="/src/recuperarSenha.html" class="forgot-password">Esqueceu a senha?</a>
 
         <button id="entrarButton" class="login-button">Entrar</button>
 
         <div class="register-text">
             Não tem uma conta?<br>
-            <a href="cadastro.html">Fazer cadastro</a>
+            <a href="/src/cadastro.html">Fazer cadastro</a>
         </div>
     </div>
 </body>
