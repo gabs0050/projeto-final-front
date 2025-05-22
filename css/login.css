@@ -11,8 +11,8 @@ body {
 
 .logo-container {
     position: absolute;
-    top: 30px;
-    left: 50px;
+    top: 20px;
+    left: 40px;
 }
 
 .logo {
@@ -105,7 +105,7 @@ h1 {
 
 .login-button {
     background-color: #325862;
-    color: white;
+    color: #FFFADC;
     border: none;
     padding: 18px;
     width: 50%;
