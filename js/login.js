@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         toastContainer.appendChild(toast)
 
+        // Fechamento do container de notificações
         closeButton.addEventListener('click', () => {
             toast.style.animation = 'fadeOut 0.3s ease-in-out forwards'
             setTimeout(() => {

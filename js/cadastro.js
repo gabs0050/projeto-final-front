@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const phoneInput = document.getElementById('phone')
     const passwordInput = document.getElementById('password')
     const confirmPasswordInput = document.getElementById('confirmPassword')
-    const palavraChaveInput = document.getElementById('palavraChave') // Novo campo
+    const palavraChaveInput = document.getElementById('palavraChave')
     const togglePasswordButtons = document.querySelectorAll('.toggle-password')
 
     // Criar container para notificações (toast)
@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
         toastContainer.appendChild(toast)
     
+        // Fechamento do container para notificações
         closeButton.addEventListener('click', () => {
             toast.style.animation = 'fadeOut 0.3s ease-in-out forwards'
             setTimeout(() => {
@@ -45,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 300)
         })
     
+        // Remoção automática do container para notificações
         setTimeout(() => {
             toast.style.animation = 'fadeOut 0.3s ease-in-out forwards'
             setTimeout(() => {
@@ -55,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 5000)
     }
 
+    // Validação de e-mail
     function validateEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         if (!emailRegex.test(email)) {
@@ -64,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return true
     }
 
+    // Validação de registro
     function validateRegistration() {
         if (!usernameInput.value || !emailInput.value || !passwordInput.value || !confirmPasswordInput.value || !phoneInput.value || !palavraChaveInput.value) {
             showToast('Por favor, preencha todos os campos obrigatórios.')
@@ -74,21 +78,25 @@ document.addEventListener('DOMContentLoaded', function () {
             return false
         }
     
+        // Verifica se o telefone contém pelo menos 11 dígitos (incluindo DDD)
         if (phoneInput.value.replace(/\D/g, '').length < 11) {
             showToast('O número de telefone deve conter pelo menos 11 dígitos (incluindo DDD).')
             return false
         }
     
+        // Verifica se a senha e a confirmação de senha são iguais
         if (passwordInput.value !== confirmPasswordInput.value) {
             showToast('As senhas não coincidem. Por favor, verifique.')
             return false
         }
-    
+
+        // Verifica se a senha tem no mínimo 4 caracteres
         if (passwordInput.value.length < 4) {
             showToast('A senha deve ter pelo menos 4 caracteres.')
             return false
         }
 
+        // Verifica se a palavra-chave tem no mínimo 4 caracteres
         if (palavraChaveInput.value.length < 4) {
             showToast('A palavra-chave deve ter pelo menos 4 caracteres.')
             return false
@@ -97,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return true
     }
 
+    // Envia os dados de cadastro para o servidor
     async function enviarCadastro(dados) {
         try {
             const response = await fetch('http://localhost:8080/v1/controle-receita/usuario', {

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const novaSenhaInput = document.getElementById('novaSenha')
     const voltarLogin = document.querySelector('.back-link')
 
-    // Criação do container de toast
+    // Criação do container dpara notificações (toast)
     const toastContainer = document.createElement('div')
     toastContainer.className = 'toast-container'
     document.body.appendChild(toastContainer)
@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         toastContainer.appendChild(toast)
 
+        // Fechamento do container de notificações
         closeButton.addEventListener('click', () => {
             toast.style.animation = 'fadeOut 0.3s ease-in-out forwards'
             setTimeout(() => {
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 300)
         })
 
+        // Remoção automática do container de notificações
         setTimeout(() => {
             toast.style.animation = 'fadeOut 0.3s ease-in-out forwards'
             setTimeout(() => {
