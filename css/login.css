@@ -262,3 +262,54 @@ h1 {
         font-size: 12px;
     }
 }
+
+
+@media screen and (min-width: 1440px) {
+    body {
+        font-size: 18px;
+    }
+
+    .container {
+        max-width: 600px;
+        padding: 60px;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+
+    .input-group label {
+        font-size: 20px;
+    }
+
+    .input-wrapper input {
+        padding: 18px 18px 18px 50px;
+        font-size: 18px;
+    }
+
+    .login-button {
+        padding: 20px;
+        font-size: 20px;
+        width: 60%;
+    }
+
+    .register-text {
+        font-size: 18px;
+    }
+
+    .logo {
+        width: 250px;
+    }
+
+    .forgot-password {
+        font-size: 18px;
+    }
+
+    .logo {
+        width: 300px;
+        height: auto;
+    }
+}

@@ -215,3 +215,43 @@ h1 {
         padding: 12px;
     }
 }
+
+@media (min-width: 1440px) {
+    body {
+        font-size: 18px;
+    }
+
+    .container {
+        max-width: 600px;
+        padding: 50px;
+        border-radius: 15px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .input-group label {
+        font-size: 20px;
+    }
+
+    .input-group input {
+        font-size: 18px;
+        padding: 18px 18px 18px 50px;
+    }
+
+    .login-button {
+        font-size: 18px;
+        padding: 20px;
+        width: 60%;
+    }
+
+    .register-text {
+        font-size: 16px;
+    }
+
+    .logo {
+        width: 300px;
+        height: auto;
+    }
+}
