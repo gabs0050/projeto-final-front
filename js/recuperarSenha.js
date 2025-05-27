@@ -13,6 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
     toastContainer.className = 'toast-container'
     document.body.appendChild(toastContainer)
 
+    // Inicializar os ícones de olho como fechados
+    togglePasswordButtons.forEach(button => {
+        button.classList.remove('fa-eye')
+        button.classList.add('fa-eye-slash')
+    })
+
     function showToast(message, type = 'error') {
         const toast = document.createElement('div')
         toast.className = `toast ${type}`

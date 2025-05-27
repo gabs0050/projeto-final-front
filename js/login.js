@@ -52,15 +52,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 5000)
     }
 
+    // Configurar o estado inicial do ícone do olho (movido para fora do segundo DOMContentLoaded)
+    function updateEyeIcon() {
+        const isPasswordHidden = senhaInput.type === 'password'
+        toggleSenha.classList.toggle('fa-eye-slash', isPasswordHidden)
+        toggleSenha.classList.toggle('fa-eye', !isPasswordHidden)
+    }
+
+    // Chamar a função para configurar o ícone inicial
+    updateEyeIcon()
+
     // Alternar visibilidade da senha
     toggleSenha.addEventListener('click', function () {
-        const type = senhaInput.getAttribute('type') === 'password' ? 'text' : 'password'
-        senhaInput.setAttribute('type', type)
-        this.classList.toggle('fa-eye')
-        this.classList.toggle('fa-eye-slash')
+        const isPasswordHidden = senhaInput.type === 'password'
+        senhaInput.type = isPasswordHidden ? 'text' : 'password'
+        updateEyeIcon()
     })
 
-    // Função para buscar usuários do endpoint
+    // Restante do seu código (fetchUsuarios, validarLogin, etc.)
     async function fetchUsuarios() {
         try {
             const response = await fetch('http://localhost:8080/v1/controle-receita/usuario')
@@ -76,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Validação do login
     async function validarLogin() {
         const usuario = usuarioInput.value.trim()
         const senha = senhaInput.value
@@ -101,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return true
     }
 
-    // Ação do botão "Entrar"
     entrarButton.addEventListener('click', async function (e) {
         e.preventDefault()
 
@@ -113,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
 
-    // Permitir que o botão seja acionado com Enter
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             entrarButton.click()

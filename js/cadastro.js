@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const createAccountButton = document.getElementById('createAccountButton')
     const usernameInput = document.getElementById('username')
     const emailInput = document.getElementById('email')
-    const phoneInput = document.getElementById('phone')
     const passwordInput = document.getElementById('password')
     const confirmPasswordInput = document.getElementById('confirmPassword')
     const palavraChaveInput = document.getElementById('palavraChave')
@@ -14,6 +13,22 @@ document.addEventListener('DOMContentLoaded', function () {
     const toastContainer = document.createElement('div')
     toastContainer.className = 'toast-container'
     document.body.appendChild(toastContainer)
+
+    // Função para atualizar os ícones de olho
+    function updateEyeIcons() {
+        togglePasswordButtons.forEach(button => {
+            const targetId = button.getAttribute('data-target')
+            const targetInput = document.getElementById(targetId)
+            const isPasswordHidden = targetInput.type === 'password'
+            
+            // Invertendo a lógica dos ícones
+            button.classList.toggle('fa-eye-slash', isPasswordHidden)
+            button.classList.toggle('fa-eye', !isPasswordHidden)
+        })
+    }
+
+    // Configurar estado inicial dos ícones
+    updateEyeIcons()
 
     function showToast(message, type = 'error') {
         const toast = document.createElement('div')
@@ -69,18 +84,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Validação de registro
     function validateRegistration() {
-        if (!usernameInput.value || !emailInput.value || !passwordInput.value || !confirmPasswordInput.value || !phoneInput.value || !palavraChaveInput.value) {
+        if (!usernameInput.value || !emailInput.value || !passwordInput.value || !confirmPasswordInput.value || !palavraChaveInput.value) {
             showToast('Por favor, preencha todos os campos obrigatórios.')
             return false
         }
     
         if (!validateEmail(emailInput.value)) {
-            return false
-        }
-    
-        // Verifica se o telefone contém pelo menos 11 dígitos (incluindo DDD)
-        if (phoneInput.value.replace(/\D/g, '').length < 11) {
-            showToast('O número de telefone deve conter pelo menos 11 dígitos (incluindo DDD).')
             return false
         }
     
@@ -134,15 +143,11 @@ document.addEventListener('DOMContentLoaded', function () {
             const targetId = this.getAttribute('data-target')
             const targetInput = document.getElementById(targetId)
             
-            if (targetInput.type === 'password') {
-                targetInput.type = 'text'
-                this.classList.remove('fa-eye')
-                this.classList.add('fa-eye-slash')
-            } else {
-                targetInput.type = 'password'
-                this.classList.remove('fa-eye-slash')
-                this.classList.add('fa-eye')
-            }
+            // Alternar tipo do input
+            targetInput.type = targetInput.type === 'password' ? 'text' : 'password'
+            
+            // Atualizar todos os ícones
+            updateEyeIcons()
         })
     })
 
@@ -156,10 +161,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     nome_usuario: usernameInput.value.trim(),
                     email: emailInput.value.trim(),
                     senha: passwordInput.value.trim(),
-                    palavra_chave: palavraChaveInput.value.trim(), // Inclui a palavra-chave
-                    foto_perfil: 'http://downloadIMAGE.JPG', // URL fixa ou pode ser solicitada
-                    data_criacao: new Date().toISOString().split('T')[0], // Data atual
-                    data_atualizacao: new Date().toISOString().split('T')[0] // Data atual
+                    palavra_chave: palavraChaveInput.value.trim(),
+                    foto_perfil: 'http://downloadIMAGE.JPG',
+                    data_criacao: new Date().toISOString().split('T')[0],
+                    data_atualizacao: new Date().toISOString().split('T')[0]
                 }
 
                 if (await enviarCadastro(dados)) {
@@ -169,25 +174,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     }, 1500)
                 }
             }
-        })
-    }
-
-    // Formatar número de telefone
-    if (phoneInput) {
-        phoneInput.addEventListener('input', function (e) {
-            let value = e.target.value.replace(/\D/g, '')
-
-            if (value.length > 0) {
-                value = value.replace(/^(\d{2})(\d)/g, '($1) $2')
-
-                if (value.length > 10) {
-                    value = value.replace(/(\d)(\d{4})$/, '$1-$2')
-                } else {
-                    value = value.replace(/(\d)(\d{4})$/, '$1-$2')
-                }
-            }
-
-            e.target.value = value
         })
     }
 
