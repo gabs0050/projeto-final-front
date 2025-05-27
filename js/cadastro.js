@@ -113,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
     
         return true
     }
-
     // Envia os dados de cadastro para o servidor
     async function enviarCadastro(dados) {
         try {
