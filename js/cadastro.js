@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Envia os dados de cadastro para o servidor
     async function enviarCadastro(dados) {
         try {
-            const response = await fetch('http://localhost:8080/v1/controle-receita/usuario', {
+            const response = await fetch('http://10.107.134.14:8080/v1/controle-receita/usuario', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

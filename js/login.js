@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Restante do seu código (fetchUsuarios, validarLogin, etc.)
     async function fetchUsuarios() {
         try {
-            const response = await fetch('http://localhost:8080/v1/controle-receita/usuario')
+            const response = await fetch('http://10.107.134.14:8080/v1/controle-receita/usuario')
             if (!response.ok) {
                 throw new Error('Erro ao buscar usuários.')
             }

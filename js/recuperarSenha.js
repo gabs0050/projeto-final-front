@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Função para buscar usuários do endpoint
     async function fetchUsuarios() {
         try {
-            const response = await fetch('http://localhost:8080/v1/controle-receita/usuario')
+            const response = await fetch('http://10.107.134.14:8080/v1/controle-receita/usuario')
             if (!response.ok) {
                 throw new Error('Erro ao buscar usuários.')
             }
@@ -77,72 +77,68 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Função para atualizar a senha do usuário
-    async function atualizarSenha(usuarioId, dadosAtualizados) {
-        try {
-            const response = await fetch(`http://localhost:8080/v1/controle-receita/usuario/${usuarioId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(dadosAtualizados)
-            })
+ // Função para atualizar a senha do usuário
+async function atualizarSenha(dadosAtualizados) {
+    try {
+        const response = await fetch('http://10.107.134.14:8080/v1/controle-receita/usuario', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dadosAtualizados)
+        })
 
-            if (!response.ok) {
-                throw new Error('Erro ao atualizar a senha.')
-            }
-
-            return true
-        } catch (error) {
-            console.error(error)
-            showToast('Erro ao atualizar a senha. Tente novamente mais tarde.')
-            return false
-        }
-    }
-
-    // Função para validar e processar a recuperação de senha
-    async function validarRecuperacaoSenha() {
-        const emailOuUsuario = emailOuUsuarioInput.value.trim()
-        const palavraChave = palavraChaveInput.value
-        const novaSenha = novaSenhaInput.value
-
-        // Verifica se todos os campos foram preenchidos
-        if (!emailOuUsuario || !palavraChave || !novaSenha) {
-            showToast('Por favor, preencha todos os campos.')
-            return false
+        if (!response.ok) {
+            throw new Error('Erro ao atualizar a senha.')
         }
 
-        const usuarios = await fetchUsuarios()
-
-        // Verifica se as credenciais correspondem
-        const usuarioValido = usuarios.find(user =>
-            (user.email === emailOuUsuario || user.nome_usuario === emailOuUsuario) &&
-            user.palavra_chave === palavraChave
-        )
-
-        if (!usuarioValido) {
-            showToast('Credenciais inválidas. Verifique seu e-mail/nome de usuário e palavra-chave.')
-            return false
-        }
-
-        // Atualiza a senha do usuário
-        const dadosAtualizados = {
-            nome_usuario: usuarioValido.nome_usuario,
-            email: usuarioValido.email,
-            senha: novaSenha,
-            palavra_chave: usuarioValido.palavra_chave,
-            foto_perfil: usuarioValido.foto_perfil,
-            data_criacao: usuarioValido.data_criacao.split('T')[0],
-            data_atualizacao: new Date().toISOString().split('T')[0]
-        }
-
-        if (await atualizarSenha(usuarioValido.id, dadosAtualizados)) {
-            showToast('Senha alterada com sucesso!', 'success')
-            return true
-        }
-
+        return true
+    } catch (error) {
+        console.error(error)
+        showToast('Erro ao atualizar a senha. Tente novamente mais tarde.')
         return false
     }
+}
+
+// Função para validar e processar a recuperação de senha
+async function validarRecuperacaoSenha() {
+    const emailOuUsuario = emailOuUsuarioInput.value.trim()
+    const palavraChave = palavraChaveInput.value
+    const novaSenha = novaSenhaInput.value
+
+    // Verifica se todos os campos foram preenchidos
+    if (!emailOuUsuario || !palavraChave || !novaSenha) {
+        showToast('Por favor, preencha todos os campos.')
+        return false
+    }
+
+    const usuarios = await fetchUsuarios()
+
+    // Verifica se as credenciais correspondem
+    const usuarioValido = usuarios.find(user =>
+        (user.email === emailOuUsuario || user.nome_usuario === emailOuUsuario) &&
+        user.palavra_chave === palavraChave
+    )
+
+    if (!usuarioValido) {
+        showToast('Credenciais inválidas. Verifique seu e-mail/nome de usuário e palavra-chave.')
+        return false
+    }
+
+    // Cria o objeto com os dados esperados pelo backend
+    const dadosAtualizados = {
+        email: usuarioValido.email,
+        senha: novaSenha,
+        palavra_chave: usuarioValido.palavra_chave
+    }
+
+    if (await atualizarSenha(dadosAtualizados)) {
+        showToast('Senha alterada com sucesso!', 'success')
+        return true
+    }
+
+    return false
+}
 
     // Evento do botão Entrar
     entrarButton.addEventListener('click', async function (e) {
