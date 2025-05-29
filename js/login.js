@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const senhaInput = document.getElementById('senha')
     const toggleSenha = document.getElementById('toggleSenha')
 
-    // Criar container de notificações
     const toastContainer = document.createElement('div')
     toastContainer.className = 'toast-container'
     document.body.appendChild(toastContainer)
@@ -32,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         toastContainer.appendChild(toast)
 
-        // Fechamento do container de notificações
         closeButton.addEventListener('click', () => {
             toast.style.animation = 'fadeOut 0.3s ease-in-out forwards'
             setTimeout(() => {
@@ -52,77 +50,68 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 5000)
     }
 
-    // Configurar o estado inicial do ícone do olho (movido para fora do segundo DOMContentLoaded)
     function updateEyeIcon() {
         const isPasswordHidden = senhaInput.type === 'password'
         toggleSenha.classList.toggle('fa-eye-slash', isPasswordHidden)
         toggleSenha.classList.toggle('fa-eye', !isPasswordHidden)
     }
 
-    // Chamar a função para configurar o ícone inicial
     updateEyeIcon()
 
-    // Alternar visibilidade da senha
     toggleSenha.addEventListener('click', function () {
         const isPasswordHidden = senhaInput.type === 'password'
         senhaInput.type = isPasswordHidden ? 'text' : 'password'
         updateEyeIcon()
     })
 
-    // Restante do seu código (fetchUsuarios, validarLogin, etc.)
-    async function fetchUsuarios() {
-        try {
-            const response = await fetch('http://10.107.134.14:8080/v1/controle-receita/usuario')
-            if (!response.ok) {
-                throw new Error('Erro ao buscar usuários.')
-            }
-            const data = await response.json()
-            return data.games || []
-        } catch (error) {
-            console.error(error)
-            showToast('Erro ao conectar com o servidor. Tente novamente mais tarde.')
-            return []
-        }
-    }
-
-    async function validarLogin() {
+    async function realizarLogin() {
         const usuario = usuarioInput.value.trim()
-        const senha = senhaInput.value
+        const senha = senhaInput.value.trim()
 
         if (!usuario || !senha) {
             showToast('Por favor, preencha todos os campos.')
-            return false
+            return
         }
 
-        const usuarios = await fetchUsuarios()
+        try {
+            const response = await fetch('http://10.107.134.14:8080/v1/controle-receita/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: usuario,
+                    senha: senha
+                })
+            })
 
-        const usuarioValido = usuarios.find(user =>
-            (user.email === usuario || user.nome_usuario === usuario) &&
-            user.senha === senha
-        )
+            const data = await response.json()
 
-        if (!usuarioValido) {
-            showToast('Credenciais inválidas. Verifique seus dados.')
-            return false
+            if (data.status && data.usuario && data.usuario.length > 0) {
+                const user = data.usuario[0]
+                // Salvar informações do usuário no localStorage
+                localStorage.setItem('accessToken', JSON.stringify(user))
+                showToast('Login realizado com sucesso!', 'success')
+
+                setTimeout(() => {
+                    window.location.href = './src/home.html'
+                }, 1500)
+            } else {
+                showToast('Credenciais inválidas. Verifique seus dados.')
+            }
+
+        } catch (error) {
+            console.error('Erro no login:', error)
+            showToast('Erro ao conectar com o servidor.')
         }
-
-        return true
     }
 
-    entrarButton.addEventListener('click', async function (e) {
+    entrarButton.addEventListener('click', function (e) {
         e.preventDefault()
-
-        if (await validarLogin()) {
-            showToast('Login realizado com sucesso!', 'success')
-            setTimeout(() => {
-                window.location.href = 'dashboard.html'
-            }, 1500)
-        }
+        realizarLogin()
     })
 
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
-            entrarButton.click()
+            realizarLogin()
         }
     })
 })
