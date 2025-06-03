@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Envia os dados de cadastro para o servidor
     async function enviarCadastro(dados) {
         try {
-            const response = await fetch('http://10.107.134.14:8080/v1/controle-receita/usuario', {
+            const response = await fetch('http://localhost:8080/v1/controle-receita/usuario', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     email: emailInput.value.trim(),
                     senha: passwordInput.value.trim(),
                     palavra_chave: palavraChaveInput.value.trim(),
-                    foto_perfil: 'http://downloadIMAGE.JPG',
+                    foto_perfil: '',
                     data_criacao: new Date().toISOString().split('T')[0],
                     data_atualizacao: new Date().toISOString().split('T')[0]
                 }

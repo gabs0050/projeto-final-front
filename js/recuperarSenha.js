@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Função para buscar usuários do endpoint
     async function fetchUsuarios() {
         try {
-            const response = await fetch('http://10.107.134.14:8080/v1/controle-receita/usuario')
+            const response = await fetch('http://localhost:8080/v1/controle-receita/usuario')
             if (!response.ok) {
                 throw new Error('Erro ao buscar usuários.')
             }
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
  // Função para atualizar a senha do usuário
 async function atualizarSenha(dadosAtualizados) {
     try {
-        const response = await fetch('http://10.107.134.14:8080/v1/controle-receita/usuario', {
+        const response = await fetch('http://localhost:8080/v1/controle-receita/usuario', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

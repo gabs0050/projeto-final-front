@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Publicar Receita</title>
+    <link rel="stylesheet" href="../css/publicarReceita.css" />
+    <script src="../js/publicarReceita.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+    <header>Publicar Receita</header>
+    <main>
+        <form id="recipeForm" novalidate>
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required placeholder="Ex: Bolo de Chocolate" />
+            <label for="tempo_preparo">Tempo de Preparo:</label>
+            <input type="text" id="tempo_preparo" name="tempo_preparo" required placeholder="Ex: 60 minutos" />
+            <label for="foto_receita">URL da Foto da Receita:</label>
+            <input type="url" id="foto_receita" name="foto_receita" required placeholder="Ex: https://site.com/imagem.jpg" />
+            <label for="ingrediente">Ingredientes:</label>
+            <textarea id="ingrediente" name="ingrediente" rows="4" required placeholder="Liste os ingredientes"></textarea>
+            <label for="modo_preparo">Modo de Preparo:</label>
+            <textarea id="modo_preparo" name="modo_preparo" rows="6" required placeholder="Descreva o passo a passo"></textarea>
+            <label for="dificuldade">Dificuldade:</label>
+            <select id="dificuldade" name="dificuldade" required>
+                <option value="" disabled selected>Selecione</option>
+                <option value="Fácil">Fácil</option>
+                <option value="Médio">Médio</option>
+                <option value="Difícil">Difícil</option>
+            </select>
+            <button type="submit">Publicar Receita</button>
+        </form>
+    </main>
+    <!-- Toast container -->
+    <div class="toast-container" aria-live="assertive" aria-atomic="true"></div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+/* publicarReceita.css */
+
+/* Basic reset and fonts */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+header {
+    background-color: #fec56c;
+    color: #FFFADC;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-weight: bold;
+    font-size: 24px;
+}
+main {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #325862;
+}
+input[type="text"],
+input[type="url"],
+select,
+textarea {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+input[type="text"]:focus,
+input[type="url"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #325862;
+    outline: none;
+    box-shadow: 0 0 5px rgba(50,88,98,0.5);
+}
+textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+button[type="submit"] {
+    background-color: #325862;
+    color: #FFFADC;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+button[type="submit"]:hover {
+    background-color: #27474f;
+}
+
+/* Toast container */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 320px;
+    pointer-events: none; /* allow clicks to pass through except on toasts */
+}
+
+/* Toast style */
+.toast {
+    pointer-events: auto; /* enable pointer events for toast */
+    display: flex;
+    align-items: center;
+    background-color: #f44336; /* error red */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    font-weight: 600;
+    font-size: 14px;
+    animation: fadeIn 0.4s ease forwards;
+    position: relative;
+    overflow: hidden;
+}
+.toast.success {
+    background-color: #4caf50; /* success green */
+}
+.toast i {
+    margin-right: 12px;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+.toast-message {
+    flex-grow: 1;
+    user-select: none;
+}
+.toast-close {
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.8);
+    padding: 0 5px;
+    border-radius: 3px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.toast-close:hover,
+.toast-close:focus {
+    background-color: rgba(255,255,255,0.3);
+    color: white;
+    outline: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}

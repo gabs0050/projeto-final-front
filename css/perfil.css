@@ -15,6 +15,7 @@ header {
     color: #fff;
 }
 
+
 .profile-header {
     display: flex;
     width: 100vw;
@@ -53,9 +54,6 @@ header {
 .profile-actions {
     display: flex;
     justify-content: space-between;
-    width: 90vw;
-    gap: 15px;
-    margin-top: 15px;
 }
 
 .action-button {
@@ -80,8 +78,14 @@ header {
     font-size: 16px;
 }
 
+.edit-profile:hover {
+    text-decoration: underline;
+}
+
 .edit-profile i {
     margin-right: 5px;
+    color: #a52a2a;
+    font-size: 30px;
 }
 
 main {
@@ -97,8 +101,9 @@ h2 {
 
 .publications-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Define 6 cards por linha */
-    gap: 15px; /* Reduz o espaçamento entre os cards */
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    margin-top: -70px;
 }
 
 .publication {
@@ -107,50 +112,137 @@ h2 {
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
-    height: 300px; /* Reduz a altura do card */
+    height: 300px;
 }
 
 .publication img {
     width: 100%;
-    height: 200px; /* Reduz a altura da imagem */
+    height: 200px;
     object-fit: cover;
 }
 
 .publication-info {
-    padding: 15px; /* Ajusta o espaçamento interno */
-    text-align: left;
+    padding: 15px;
+    text-align: right; /* Move o texto e o ícone para o lado direito */
 }
 
 .publication-info h3 {
     margin: 0;
-    font-size: 16px; /* Ajusta o tamanho do título */
+    font-size: 16px;
     color: #333;
-}
-
-.publication-info p {
-    margin: 5px 0 0;
-    font-size: 14px; /* Ajusta o tamanho do texto */
-    color: #666;
+    text-align: left;
 }
 
 .publication::before {
-    content: "\f005"; /* Código Unicode do ícone de estrela (Font Awesome) */
-    font-family: "Font Awesome 5 Free"; /* Fonte do Font Awesome */
-    font-weight: 900; /* Peso necessário para exibir o ícone */
+    content: "\f005";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     position: absolute;
     top: 10px;
     left: 10px;
-    font-size: 24px; /* Aumenta o tamanho do ícone */
-    color: #ffd700; /* Cor dourada */
+    font-size: 24px;
+    color: #ffd700;
 }
 
-.publication::after {
-    content: "\f017"; /* Código Unicode do ícone de relógio (Font Awesome) */
-    font-family: "Font Awesome 5 Free"; /* Fonte do Font Awesome */
-    font-weight: 900; /* Peso necessário para exibir o ícone */
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 18px; /* Aumenta um pouco o tamanho do ícone */
+.publication-info p::after {
+    content: "\f017";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 14px;
     color: #666;
+    margin-left: 5px;
+    display: inline;
+}
+
+.publication-info p {
+    display: inline-flex; /* Garante que o texto e o ícone fiquem alinhados horizontalmente */
+    align-items: center;
+    gap: 5px;
+    justify-content: flex-end; /* Alinha o conteúdo à direita */
+}
+
+@media screen and (min-width: 1280px) {
+    body {
+        font-size: 18px;
+    }
+
+    .profile-header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 40px 80px;
+    }
+    .profile-info {
+        gap: 40px;
+    }
+
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+    }
+
+    .profile-actions {
+        width: 100%;
+        gap: 40px;
+        margin-top: 300px;
+    }
+
+    .profile-details h1 {
+        font-size: 36px;
+    }
+
+    .profile-details p {
+        font-size: 20px;
+    }
+
+    .action-button {
+        font-size: 16px;
+        padding: 15px 30px;
+    }
+
+    main {
+        padding: 40px 80px;
+    }
+
+    .publications-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 30px;
+    }
+
+    .publication {
+        height: 350px;
+    }
+
+    .publication img {
+        height: 250px;
+    }
+
+    .publication-info h3 {
+        font-size: 18px;
+    }
+
+    .publication-info p {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .profile-actions {
+        width: 100%;
+        gap: 40px;
+    }
+
+    .action-button {
+        font-size: 18px;
+        padding: 20px 40px;
+        border-radius: 10px;
+    }
+
+    .edit-profile {
+        margin-top: -70px;
+        margin-right: -55px;
+        font-size: 23px;
+        padding: 15px 30px;
+        border-radius: 8px;
+        width: 250px;
+    }
 }

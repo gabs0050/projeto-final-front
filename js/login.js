@@ -1,6 +1,12 @@
 'use strict'
 
 document.addEventListener('DOMContentLoaded', function () {
+    const userData = localStorage.getItem('userData')
+    if (userData) {
+        window.location.href = './src/home.html'
+        return
+    }
+
     const entrarButton = document.getElementById('entrarButton')
     const usuarioInput = document.getElementById('usuario')
     const senhaInput = document.getElementById('senha')
@@ -34,18 +40,14 @@ document.addEventListener('DOMContentLoaded', function () {
         closeButton.addEventListener('click', () => {
             toast.style.animation = 'fadeOut 0.3s ease-in-out forwards'
             setTimeout(() => {
-                if (toastContainer.contains(toast)) {
-                    toastContainer.removeChild(toast)
-                }
+                toast.remove()
             }, 300)
         })
 
         setTimeout(() => {
             toast.style.animation = 'fadeOut 0.3s ease-in-out forwards'
             setTimeout(() => {
-                if (toastContainer.contains(toast)) {
-                    toastContainer.removeChild(toast)
-                }
+                toast.remove()
             }, 300)
         }, 5000)
     }
@@ -74,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         try {
-            const response = await fetch('http://10.107.134.14:8080/v1/controle-receita/login', {
+            const response = await fetch('http://localhost:8080/v1/controle-receita/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -87,8 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (data.status && data.usuario && data.usuario.length > 0) {
                 const user = data.usuario[0]
-                // Salvar informações do usuário no localStorage
-                localStorage.setItem('accessToken', JSON.stringify(user))
+                localStorage.setItem('userData', JSON.stringify(user))
                 showToast('Login realizado com sucesso!', 'success')
 
                 setTimeout(() => {
