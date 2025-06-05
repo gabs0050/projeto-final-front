@@ -90,20 +90,21 @@ header {
 
 main {
     padding: 20px;
+    margin-top: 0; /* Remove espaçamento extra no topo */
 }
 
 h2 {
     text-align: left;
     color: #fff;
-    font-size: 20px;
-    margin-bottom: 20px;
+    font-size: 30px;
+    margin-top: -20px;
 }
 
 .publications-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 15px;
-    margin-top: -70px;
+    margin-top: 40px;
 }
 
 .publication {
@@ -114,6 +115,12 @@ h2 {
     position: relative;
     height: 300px;
 }
+
+.publication-date {
+    float: left;
+    margin-top: 15px;
+}
+
 
 .publication img {
     width: 100%;
@@ -134,14 +141,8 @@ h2 {
 }
 
 .publication::before {
-    content: "\f005";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 24px;
-    color: #ffd700;
+    /* Removed star icon */
+    content: none;
 }
 
 .publication-info p::after {
@@ -159,6 +160,19 @@ h2 {
     align-items: center;
     gap: 5px;
     justify-content: flex-end; /* Alinha o conteúdo à direita */
+    vertical-align: middle;
+}
+
+.publication-info p::after {
+    content: "\f017";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 14px;
+    color: #666;
+    margin-left: 5px;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
 }
 
 @media screen and (min-width: 1280px) {
@@ -169,7 +183,7 @@ h2 {
     .profile-header {
         flex-direction: row;
         justify-content: space-between;
-        padding: 40px 80px;
+        padding: 10px 80px;
     }
     .profile-info {
         gap: 40px;
@@ -183,7 +197,7 @@ h2 {
     .profile-actions {
         width: 100%;
         gap: 40px;
-        margin-top: 300px;
+        margin-top: 200px; /* Aumentado para mover os botões mais para baixo */
     }
 
     .profile-details h1 {
@@ -245,4 +259,4 @@ h2 {
         border-radius: 8px;
         width: 250px;
     }
-}
+}      

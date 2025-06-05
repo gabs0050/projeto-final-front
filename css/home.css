@@ -1,3 +1,4 @@
+/* ======= Estilo Geral ======= */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -12,9 +13,7 @@ header {
     align-items: center;
     width: calc(100% - 40px);
     padding: 10px 20px;
-    margin: 0 auto;
     background-color: #fec56c;
-    color: #FFFADC;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
@@ -23,12 +22,11 @@ header {
     z-index: 1000;
 }
 
-
 main {
-    margin-top: 80px;
-    text-align: center;
+    margin-top: 100px;
 }
 
+/* ======= Header ======= */
 .header-left .logo {
     height: 100px;
     width: 100px;
@@ -36,7 +34,7 @@ main {
 
 .header-center .search-bar {
     width: 600px;
-    height: 32px;
+    height: 36px;
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -44,39 +42,26 @@ main {
 }
 
 .header-right {
-    position: relative;
-    padding-right: 0px;
     display: flex;
     align-items: center;
+    position: relative;
     gap: 10px;
-    min-width: 80px;
 }
 
 .profile-picture {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    cursor: pointer;
     object-fit: cover;
     border: 2px solid #FFFADC;
-    display: block;
-}
-
-.menu-button {
-    background-color: #325862;
-    color: #FFFADC;
-    border: none;
-    font-size: 24px;
     cursor: pointer;
-    padding: 5px 10px;
 }
 
 .menu-dropdown {
     display: none;
     position: absolute;
-    margin-top: 12px;
     top: 100%;
-    right: 24px;
+    right: 0;
     background-color: #FFFADC;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -85,32 +70,26 @@ main {
     min-width: 180px;
 }
 
-.menu-dropdown .menu-item {
+.menu-item {
     display: flex;
     align-items: center;
     padding: 12px 20px;
     color: #325862;
     text-decoration: none;
     font-size: 16px;
-    transition: background-color 0.3s;
 }
 
-.menu-dropdown .menu-item i {
+.menu-item i {
     margin-right: 12px;
-    font-size: 18px;
 }
 
-.menu-dropdown .menu-item:hover {
+.menu-item:hover {
     background-color: #f0f0f0;
 }
 
-
-.menu-dropdown .menu-item:hover {
-    background-color: #f0f0f0;
-}
-
+/* ======= Modal ======= */
 .modal {
-    display: none; /* Oculto por padrão */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -127,8 +106,8 @@ main {
     padding: 20px;
     border-radius: 8px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .modal-buttons {
@@ -159,15 +138,117 @@ main {
     opacity: 0.9;
 }
 
-@media screen and (min-width: 1440px) {
-    body {
-        font-size: 18px;
-    }
+/* ======= Publications ======= */
+main h2 {
+    text-align: left;
+    color: #333;
+    font-size: 30px;
+    margin: 20px 40px;
+}
 
+.publications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px 40px;
+}
+
+.publication {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Adicionado para posicionamento absoluto do usuário */
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+}
+
+.recipe-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Novo estilo para o usuário no canto superior esquerdo */
+.user-overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 6px 12px;
+    border-radius: 20px;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #FFFADC;
+}
+
+.user-name {
+    font-weight: bold;
+    color: #325862;
+    font-size: 14px;
+}
+
+.publication-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.publication-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.publication-date {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.publication-info p {
+    margin: 0;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.publication-info p::after {
+    content: "\f017";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 14px;
+    color: #666;
+}
+
+/* ======= Responsivo ======= */
+@media screen and (min-width: 1440px) {
     header {
         width: calc(100% - 80px);
+        padding: 10px 40px;
         height: 117px;
-        padding: 10px 40px; 
     }
 
     .header-left .logo {
@@ -178,7 +259,7 @@ main {
     .header-center .search-bar {
         width: 800px;
         height: 50px;
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .header-right .profile-picture {
@@ -187,25 +268,45 @@ main {
     }
 
     .menu-dropdown {
-        min-width: 185px;
-        right: 5px;
+        min-width: 200px;
     }
 
-    .menu-dropdown .menu-item {
+    .menu-item {
         font-size: 18px;
-        padding: 14px 18px;
-    }
-
-    main {
-        margin-top: 80px;
+        padding: 14px 20px;
     }
 
     .modal-content {
-        width: 400px
+        width: 400px;
     }
 
     .modal-button {
         font-size: 18px;
         padding: 12px 24px;
+    }
+
+    .publications-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+
+    .publication {
+        height: 380px;
+    }
+
+    .image-container {
+        height: 220px;
+    }
+
+    .user-overlay {
+        padding: 8px 15px;
+    }
+
+    .user-avatar {
+        width: 35px;
+        height: 35px;
+    }
+
+    .user-name {
+        font-size: 15px;
     }
 }

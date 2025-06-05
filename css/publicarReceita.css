@@ -1,6 +1,6 @@
 /* publicarReceita.css */
 
-/* Basic reset and fonts */
+/* Reset básico e fontes */
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -8,6 +8,7 @@ body {
     padding: 0;
     color: #333;
 }
+
 header {
     background-color: #fec56c;
     color: #FFFADC;
@@ -17,6 +18,7 @@ header {
     font-weight: bold;
     font-size: 24px;
 }
+
 main {
     max-width: 600px;
     margin: 40px auto;
@@ -25,18 +27,21 @@ main {
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
+
 form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
+
 label {
     font-weight: bold;
     font-size: 16px;
     color: #325862;
 }
+
+/* Inputs texto, select, textarea */
 input[type="text"],
-input[type="url"],
 select,
 textarea {
     font-size: 16px;
@@ -48,18 +53,55 @@ textarea {
     font-family: inherit;
     transition: border-color 0.3s ease;
 }
+
 input[type="text"]:focus,
-input[type="url"]:focus,
 select:focus,
 textarea:focus {
     border-color: #325862;
     outline: none;
     box-shadow: 0 0 5px rgba(50,88,98,0.5);
 }
+
 textarea {
     resize: vertical;
     font-family: inherit;
 }
+
+/* Input file personalizado */
+input[type="file"] {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    font-family: inherit;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="file"]:focus {
+    outline: none;
+    border-color: #325862;
+    box-shadow: 0 0 5px rgba(50,88,98,0.5);
+}
+
+/* Preview da imagem */
+#preview-container {
+    margin-top: 10px;
+    max-height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+#imagePreview {
+    max-width: 100%;
+    max-height: 200px;
+    display: none;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+/* Botão enviar */
 button[type="submit"] {
     background-color: #325862;
     color: #FFFADC;
@@ -71,6 +113,7 @@ button[type="submit"] {
     border-radius: 6px;
     transition: background-color 0.3s ease;
 }
+
 button[type="submit"]:hover {
     background-color: #27474f;
 }
@@ -85,15 +128,15 @@ button[type="submit"]:hover {
     flex-direction: column;
     gap: 10px;
     max-width: 320px;
-    pointer-events: none; /* allow clicks to pass through except on toasts */
+    pointer-events: none; /* Permitir clique somente nos toasts */
 }
 
-/* Toast style */
+/* Toast estilo */
 .toast {
-    pointer-events: auto; /* enable pointer events for toast */
+    pointer-events: auto;
     display: flex;
     align-items: center;
-    background-color: #f44336; /* error red */
+    background-color: #f44336; /* vermelho erro */
     color: white;
     padding: 15px 20px;
     border-radius: 6px;
@@ -104,18 +147,26 @@ button[type="submit"]:hover {
     position: relative;
     overflow: hidden;
 }
+
 .toast.success {
-    background-color: #4caf50; /* success green */
+    background-color: #4caf50; /* verde sucesso */
 }
+
+.toast.info {
+    background-color: #2196f3; /* azul informação */
+}
+
 .toast i {
     margin-right: 12px;
     font-size: 18px;
     flex-shrink: 0;
 }
+
 .toast-message {
     flex-grow: 1;
     user-select: none;
 }
+
 .toast-close {
     cursor: pointer;
     font-size: 20px;
@@ -127,6 +178,7 @@ button[type="submit"]:hover {
     border-radius: 3px;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
+
 .toast-close:hover,
 .toast-close:focus {
     background-color: rgba(255,255,255,0.3);
@@ -134,7 +186,7 @@ button[type="submit"]:hover {
     outline: none;
 }
 
-/* Animations */
+/* Animações */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -145,6 +197,7 @@ button[type="submit"]:hover {
         transform: translateX(0);
     }
 }
+
 @keyframes fadeOut {
     from {
         opacity: 1;
