@@ -20,24 +20,40 @@ header {
 }
 
 main {
-    max-width: 600px;
+    max-width: 600px; /* Default for smaller screens */
     margin: 40px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #FFFADC;
+    border: 2px solid black;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Adicionando largura máxima ao card das receitas */
+/* This rule seems out of place for publicarReceita.css as it targets 'card-receita' */
+/* If this CSS file is only for publicarReceita.html, you might want to remove or relocate this. */
+/* If it's a global CSS, then it's fine, but its effect here would be minimal without a .card-receita element. */
+.card-receita {
+    max-width: 50%; /* ajuste o valor conforme desejado */
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+    padding: 15px;
 }
 
 form {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    background-color: #FFFADC;
 }
 
 label {
     font-weight: bold;
     font-size: 16px;
-    color: #325862;
+    color: black;
 }
 
 /* Inputs texto, select, textarea */
@@ -46,12 +62,19 @@ select,
 textarea {
     font-size: 16px;
     padding: 10px;
-    border: 1px solid #ccc;
+    background-color: #325862;
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
     font-family: inherit;
     transition: border-color 0.3s ease;
+    color: #ffffff;
+}
+
+input::placeholder,
+select,
+textarea::placeholder{
+    color: #ffffff;
 }
 
 input[type="text"]:focus,
@@ -69,7 +92,8 @@ textarea {
 
 /* Input file personalizado */
 input[type="file"] {
-    border: 1px solid #ccc;
+    background-color: #325862;
+    color: #ffffff;
     padding: 8px;
     border-radius: 5px;
     font-family: inherit;
@@ -91,6 +115,10 @@ input[type="file"]:focus {
     max-height: 200px;
     overflow: hidden;
     border-radius: 8px;
+    display: flex; /* Added for centering */
+    justify-content: center; /* Added for centering */
+    align-items: center; /* Added for centering */
+    background-color: #eee; /* Added a subtle background */
 }
 
 #imagePreview {
@@ -103,8 +131,8 @@ input[type="file"]:focus {
 
 /* Botão enviar */
 button[type="submit"] {
-    background-color: #325862;
-    color: #FFFADC;
+    background-color: #982829;
+    color: #ffffff;
     border: none;
     cursor: pointer;
     font-size: 18px;
@@ -185,7 +213,6 @@ button[type="submit"]:hover {
     color: white;
     outline: none;
 }
-
 /* Animações */
 @keyframes fadeIn {
     from {
@@ -206,5 +233,109 @@ button[type="submit"]:hover {
     to {
         opacity: 0;
         transform: translateX(100%);
+    }
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* For screens larger than 768px (common tablet and small laptop sizes) */
+@media (min-width: 768px) {
+    main {
+        max-width: 750px; /* Increase main content width */
+        padding: 30px; /* More padding */
+    }
+
+    header {
+        font-size: 28px; /* Slightly larger header font */
+    }
+
+    label {
+        font-size: 17px; /* Slightly larger label font */
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+        padding: 12px; /* Increase input padding */
+        font-size: 17px;
+    }
+
+    button[type="submit"] {
+        padding: 18px; /* Larger button */
+        font-size: 20px;
+    }
+}
+
+/* For screens larger than 1024px (common laptop and desktop sizes) */
+@media (min-width: 1024px) {
+    main {
+        max-width: 850px; /* Further increase main content width for larger screens */
+        padding: 40px;
+    }
+
+    header {
+        font-size: 32px; /* Even larger header */
+        padding: 25px;
+    }
+
+    form {
+        gap: 20px; /* More space between form elements */
+    }
+
+    label {
+        font-size: 18px;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+        padding: 14px;
+        font-size: 18px;
+    }
+
+    button[type="submit"] {
+        padding: 20px;
+        font-size: 22px;
+    }
+
+    #preview-container {
+        max-height: 250px; /* Slightly larger preview area */
+    }
+
+    #imagePreview {
+        max-height: 250px;
+    }
+}
+
+@media (min-width: 1280px) {
+    main {
+        max-width: 960px; /* Optimal width for very large screens */
+    }
+
+    header {
+        font-size: 36px;
+        padding: 30px;
+    }
+
+    label {
+        font-size: 19px;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+        font-size: 19px;
+    }
+
+    button[type="submit"] {
+        font-size: 24px;
+    }
+
+    #preview-container {
+        max-height: 300px; /* Even larger preview area */
+    }
+
+    #imagePreview {
+        max-height: 300px;
     }
 }

@@ -198,9 +198,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 id_usuario: userId
             }
 
+            async function salvarReceitaNoBanco(recipeData) {
+                try {
+                    const response = await fetch('http://localhost:8080/v1/controle-receita/receita', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify(recipeData)
+                    });
+            
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || 'Erro ao salvar receita no banco de dados');
+                    }
+            
+                    return await response.json();
+                } catch (error) {
+                    throw error;
+                }
+            }
+
             // Enviar para a função de salvar receita (defina essa função no firebaseConfig.js ou aqui)
             // Exemplo fictício:
-            // await salvarReceitaNoBanco(recipeData)
+            const response = await salvarReceitaNoBanco(recipeData);
+            console.log('Receita salva com ID:', response.id); // Opcional - para debug
 
             showToast('Receita publicada com sucesso!', 'success')
             form.reset()
