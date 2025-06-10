@@ -1,0 +1,482 @@
+/* ======= Estilo Geral (Reutilizado de home.css) ======= */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+main {
+    margin-top: 100px; /* Espaço para o header */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha o conteúdo ao topo */
+    min-height: calc(100vh - 100px); /* Garante que o main ocupe a altura restante */
+}
+
+/* ======= Header (Reutilizado de home.css) ======= */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 40px);
+    padding: 10px 20px;
+    background-color: #fec56c; /* Cor de destaque */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.header-left .logo {
+    height: 100px;
+    width: 100px;
+}
+
+.header-center .search-bar { /* Barra de busca, pode estar oculta ou estilizada para esta tela */
+    width: 600px;
+    height: 36px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    display: none; /* Oculta a barra de busca nesta tela */
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 10px;
+}
+
+.profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #FFFADC;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.profile-picture:hover {
+    transform: scale(1.05);
+}
+
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #FFFADC;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1100;
+    min-width: 180px;
+    overflow: hidden;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #325862;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menu-item i {
+    margin-right: 12px;
+    color: #fec56c;
+}
+
+.menu-item:hover {
+    background-color: #f0f0f0;
+    color: #27474f;
+}
+
+/* ======= Container Principal do Formulário ======= */
+.profile-update-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Largura máxima do formulário */
+    box-sizing: border-box;
+    margin-top: 30px; /* Espaço do header */
+}
+
+.profile-update-container h2 {
+    text-align: center;
+    color: #325862;
+    margin-bottom: 30px;
+    font-size: 28px;
+    border-bottom: 2px solid #fec56c;
+    padding-bottom: 10px;
+}
+
+/* ======= Form Groups ======= */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+    font-size: 15px;
+}
+
+/* Base input style (will be overridden for password container's input) */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box; /* Inclui padding e border na largura */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: #fec56c;
+    box-shadow: 0 0 0 3px rgba(254, 197, 108, 0.3);
+    outline: none;
+}
+
+/* ======= Avatar Upload ======= */
+.avatar-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-image-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fec56c;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.upload-button {
+    background-color: #fec56c; /* Cor mais escura para o botão */
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.upload-button:hover {
+    background-color: #d6a658; /* Tom mais escuro no hover */
+}
+
+.upload-button input[type="file"] {
+    display: none; /* Oculta o input de arquivo padrão */
+}
+
+/* ======= Botão de Submissão ======= */
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #fec56c; /* Cor de destaque */
+    color: #325862; /* Cor do texto no botão */
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 20px;
+}
+
+.submit-button:hover {
+    background-color: #ffda89; /* Tom mais claro no hover */
+    transform: translateY(-2px);
+}
+
+.submit-button:active {
+    transform: translateY(0);
+}
+
+/* NOVO: Estilos para o input de Senha com Ícone de Olho */
+.password-input-container {
+    position: relative;
+    width: 100%;
+    /* Removido `display: flex` para não afetar o input diretamente */
+}
+
+.password-input-container input {
+    width: 100%;
+    padding-right: 40px; /* Cria espaço para o ícone */
+    box-sizing: border-box; /* Garante que padding e borda não aumentem a largura */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px; /* Ajusta a posição do ícone da direita */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888; /* Cor do ícone */
+    font-size: 1.1em; /* Tamanho do ícone */
+}
+
+.toggle-password:hover {
+    color: #333; /* Cor do ícone ao passar o mouse */
+}
+
+
+/* ======= Toast Messages (Reutilizado de publicarReceita.css) ======= */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-size: 15px;
+    min-width: 250px;
+    max-width: 350px;
+    /* Remover animação fadeOut daqui, ela será aplicada via JS */
+    /* animation: fadeIn 0.5s ease forwards, fadeOut 0.5s ease forwards 4.5s; */
+}
+
+.toast.success {
+    background-color: #28a745; /* Verde sucesso */
+}
+
+.toast.error {
+    background-color: #dc3545; /* Vermelho erro */
+}
+
+.toast.info {
+    background-color: #17a2b8; /* Azul info */
+}
+
+.toast i {
+    font-size: 20px;
+}
+
+.toast-message {
+    flex-grow: 1;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+/* Manter fadeIn e fadeOut para controle via JS */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* ======= Modals (Geral - Reutilizado de home.css) ======= */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeInModal 0.3s ease-out forwards;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: slideInFromTop 0.4s ease-out forwards;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Modal de Logout específico */
+.modal-content {
+    width: 320px;
+    text-align: center;
+    padding: 30px;
+}
+
+.modal-content p {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: #444;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.modal-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.modal-button.confirm {
+    background-color: #d9534f;
+    color: white;
+}
+
+.modal-button.cancel {
+    background-color: #5bc0de;
+    color: white;
+}
+
+.modal-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.modal-button:active {
+    transform: translateY(0);
+}
+
+
+/* Media Queries (Reutilizado de home.css e adaptado) */
+
+/* Para telas de tablets e laptops pequenos (>= 768px) */
+@media screen and (min-width: 768px) {
+    header {
+        width: calc(100% - 60px);
+        padding: 15px 30px;
+    }
+    .header-left .logo { height: 110px; width: 110px; }
+    .profile-picture { width: 60px; height: 60px; }
+    .menu-dropdown { min-width: 200px; }
+    .menu-item { font-size: 17px; padding: 14px 25px; }
+
+    main {
+        margin-top: 120px;
+    }
+    .profile-update-container {
+        padding: 40px;
+        max-width: 550px;
+    }
+    .profile-update-container h2 { font-size: 32px; }
+    .form-group label { font-size: 16px; }
+    .form-group input { padding: 14px; font-size: 17px; }
+    .profile-image-preview { width: 140px; height: 140px; }
+    .upload-button { padding: 12px 25px; font-size: 16px; }
+    .submit-button { padding: 18px; font-size: 20px; }
+}
+
+/* Para telas de laptops grandes e desktops (>= 1024px) */
+@media screen and (min-width: 1024px) {
+    header {
+        width: calc(100% - 80px);
+        padding: 20px 40px;
+        height: 120px;
+    }
+    .header-left .logo { height: 130px; width: 130px; }
+    .profile-picture { width: 70px; height: 70px; }
+    .menu-dropdown { min-width: 220px; }
+    .menu-item { font-size: 18px; padding: 16px 30px; }
+
+    main {
+        margin-top: 150px;
+    }
+    .profile-update-container {
+        padding: 50px;
+        max-width: 600px;
+    }
+    .profile-update-container h2 { font-size: 36px; }
+    .form-group label { font-size: 17px; }
+    .form-group input { padding: 16px; font-size: 18px; }
+    .profile-image-preview { width: 160px; height: 160px; }
+    .upload-button { padding: 14px 30px; font-size: 17px; }
+    .submit-button { padding: 20px; font-size: 22px; }
+}
+
+/* Para telas de MacBooks e Ultra-Wides (>= 1440px) */
+@media screen and (min-width: 1440px) {
+    header {
+        width: calc(100% - 100px);
+        padding: 25px 50px;
+        height: 140px;
+    }
+    .header-left .logo { height: 150px; width: 150px; }
+    .profile-picture { width: 80px; height: 80px; }
+    .menu-dropdown { min-width: 250px; }
+    .menu-item { font-size: 19px; padding: 18px 35px; }
+
+    main {
+        margin-top: 170px;
+    }
+    .profile-update-container {
+        padding: 60px;
+        max-width: 700px;
+    }
+    .profile-update-container h2 { font-size: 40px; }
+    .form-group label { font-size: 18px; }
+    .form-group input { padding: 18px; font-size: 19px; }
+    .profile-image-preview { width: 180px; height: 180px; }
+    .upload-button { padding: 16px 35px; font-size: 18px; }
+    .submit-button { padding: 22px; font-size: 24px; }
+}

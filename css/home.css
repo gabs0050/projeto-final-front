@@ -5,28 +5,30 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
+    line-height: 1.6;
 }
 
+/* Garante que o conteúdo não fique por baixo do cabeçalho fixo */
+main {
+    margin-top: 100px; /* Espaço para o header */
+}
+
+/* ======= Header ======= */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: calc(100% - 40px);
+    width: calc(100% - 40px); /* 100% menos o padding lateral */
     padding: 10px 20px;
     background-color: #fec56c;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
+    position: fixed; /* Fixa o header no topo */
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 1000; /* Garante que fique acima de outros elementos */
 }
 
-main {
-    margin-top: 100px;
-}
-
-/* ======= Header ======= */
 .header-left .logo {
     height: 100px;
     width: 100px;
@@ -39,12 +41,13 @@ main {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    box-sizing: border-box; /* Inclui padding e border na largura */
 }
 
 .header-right {
     display: flex;
     align-items: center;
-    position: relative;
+    position: relative; /* Para posicionar o dropdown */
     gap: 10px;
 }
 
@@ -55,19 +58,25 @@ main {
     object-fit: cover;
     border: 2px solid #FFFADC;
     cursor: pointer;
+    transition: transform 0.2s ease; /* Efeito ao clicar */
+}
+
+.profile-picture:hover {
+    transform: scale(1.05);
 }
 
 .menu-dropdown {
-    display: none;
+    display: none; /* Oculto por padrão */
     position: absolute;
-    top: 100%;
+    top: 100%; /* Abaixo da foto de perfil */
     right: 0;
     background-color: #FFFADC;
-    border: 1px solid #ccc;
+    border: 1px solid #eee;
     border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1100; /* Acima do header e outros conteúdos */
     min-width: 180px;
+    overflow: hidden; /* Garante que os cantos arredondados funcionem */
 }
 
 .menu-item {
@@ -77,118 +86,80 @@ main {
     color: #325862;
     text-decoration: none;
     font-size: 16px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .menu-item i {
     margin-right: 12px;
+    color: #fec56c; /* Cor para os ícones */
 }
 
 .menu-item:hover {
     background-color: #f0f0f0;
+    color: #27474f;
 }
 
-/* ======= Modal ======= */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-}
-
-.modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    width: 300px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.modal-buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-
-.modal-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.modal-button.confirm {
-    background-color: #d9534f;
-    color: white;
-}
-
-.modal-button.cancel {
-    background-color: #5bc0de;
-    color: white;
-}
-
-.modal-button:hover {
-    opacity: 0.9;
-}
-
-/* ======= Publications ======= */
+/* ======= Título da Página de Publicações ======= */
 main h2 {
     text-align: left;
     color: #333;
     font-size: 30px;
-    margin: 20px 40px;
+    margin: 20px 40px; /* Margem para alinhar com o grid */
+    padding-bottom: 10px;
+    border-bottom: 2px solid #fec56c; /* Linha decorativa */
+    display: inline-block; /* Para a linha ter a largura do texto */
 }
 
+/* ======= Grid de Publicações ======= */
 .publications-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    padding: 20px 40px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 280px mínimo */
+    gap: 25px; /* Espaçamento entre os cards */
+    padding: 20px 40px; /* Padding ao redor do grid */
 }
 
 .publication {
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 350px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    position: relative; /* Adicionado para posicionamento absoluto do usuário */
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 350px; /* Altura fixa para cards mais uniformes */
+}
+
+.publication:hover {
+    transform: translateY(-5px); /* Efeito de "levantar" */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .image-container {
     position: relative;
     width: 100%;
-    height: 200px;
+    height: 200px; /* Altura da imagem do card */
+    overflow: hidden;
 }
 
 .recipe-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Garante que a imagem preencha o container */
 }
 
-/* Novo estilo para o usuário no canto superior esquerdo */
 .user-overlay {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 12px;
+    left: 12px;
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95); /* Fundo semi-transparente */
     padding: 6px 12px;
     border-radius: 20px;
     z-index: 2;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .user-avatar {
@@ -196,13 +167,17 @@ main h2 {
     height: 30px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #FFFADC;
+    border: 2px solid #fec56c; /* Borda da cor do tema */
 }
 
 .user-name {
     font-weight: bold;
     color: #325862;
     font-size: 14px;
+    white-space: nowrap; /* Impede que o nome quebre linha */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adiciona "..." se o nome for muito longo */
+    max-width: 100px; /* Limita a largura do nome */
 }
 
 .publication-info {
@@ -210,18 +185,31 @@ main h2 {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between; /* Espaça o conteúdo verticalmente */
 }
 
 .publication-info h3 {
     margin: 0 0 8px 0;
-    font-size: 18px;
+    font-size: 19px;
     color: #333;
+    font-weight: 600;
 }
 
 .publication-date {
-    font-size: 14px;
+    font-size: 13px;
     color: #666;
     margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.publication-date::before {
+    content: "\f073"; /* Ícone de calendário */
+    font-family: "Font Awesome 6 Free"; /* Atualizado para Font Awesome 6 */
+    font-weight: 900;
+    font-size: 14px;
+    color: #666;
 }
 
 .publication-info p {
@@ -230,41 +218,226 @@ main h2 {
     display: flex;
     align-items: center;
     gap: 5px;
-    margin-top: auto;
+    margin-top: auto; /* Empurra para o final do card */
     padding-top: 8px;
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid #f5f5f5;
+    font-size: 15px;
 }
 
-.publication-info p::after {
-    content: "\f017";
-    font-family: "Font Awesome 5 Free";
+.publication-info p::before {
+    content: "\f017"; /* Ícone de relógio */
+    font-family: "Font Awesome 6 Free"; /* Atualizado para Font Awesome 6 */
     font-weight: 900;
     font-size: 14px;
     color: #666;
 }
 
-/* ======= Responsivo ======= */
-@media screen and (min-width: 1440px) {
+/* ======= Modals (Geral) ======= */
+.modal {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Acima de tudo */
+    animation: fadeInModal 0.3s ease-out forwards;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    position: relative; /* Para o botão de fechar */
+    animation: slideInFromTop 0.4s ease-out forwards;
+    max-height: 90vh; /* Limita a altura para que o conteúdo não estoure a tela */
+    overflow-y: auto; /* Habilita scroll se o conteúdo for muito grande */
+}
+
+/* Animações de Modal */
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ======= Modal de Logout ======= */
+.modal-content.logout-modal-content { /* Classe específica para o modal de logout */
+    width: 320px;
+    text-align: center;
+    padding: 30px;
+}
+
+.modal-content.logout-modal-content p {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: #444;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.modal-button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.modal-button.confirm {
+    background-color: #d9534f; /* Vermelho */
+    color: white;
+}
+
+.modal-button.cancel {
+    background-color: #5bc0de; /* Azul */
+    color: white;
+}
+
+.modal-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.modal-button:active {
+    transform: translateY(0);
+}
+
+/* ======= Modal de Detalhes da Receita ======= */
+.modal-content.recipe-detail-content {
+    max-width: 700px; /* Tamanho padrão para telas menores/médias */
+    width: 90%; /* Ocupa 90% da largura disponível */
+    padding: 30px;
+    text-align: left;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+.detail-recipe-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-detail-content h3 {
+    font-size: 28px;
+    color: #325862;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.detail-user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    justify-content: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.detail-user-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fec56c;
+}
+
+.detail-user-name {
+    font-weight: bold;
+    color: #555;
+    font-size: 17px;
+}
+
+.recipe-detail-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.recipe-detail-content p strong {
+    color: #333;
+}
+
+.recipe-detail-content h4 {
+    font-size: 22px;
+    color: #325862;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #fec56c;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+.multiline-text {
+    white-space: pre-wrap; /* Preserva espaços em branco e quebras de linha */
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 15px;
+    border: 1px solid #eee;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+/* ======= Media Queries (Responsividade) ======= */
+
+/* Para telas de tablets e laptops pequenos (>= 768px) */
+@media screen and (min-width: 768px) {
     header {
-        width: calc(100% - 80px);
-        padding: 10px 40px;
-        height: 117px;
+        width: calc(100% - 60px); /* Ajusta padding */
+        padding: 15px 30px;
     }
 
     .header-left .logo {
-        height: 140px;
-        width: 140px;
+        height: 110px;
+        width: 110px;
     }
 
     .header-center .search-bar {
-        width: 800px;
-        height: 50px;
-        font-size: 18px;
+        width: 650px;
+        height: 40px;
+        font-size: 17px;
     }
 
-    .header-right .profile-picture {
-        width: 70px;
-        height: 70px;
+    .profile-picture {
+        width: 60px;
+        height: 60px;
     }
 
     .menu-dropdown {
@@ -272,21 +445,23 @@ main h2 {
     }
 
     .menu-item {
-        font-size: 18px;
-        padding: 14px 20px;
+        font-size: 17px;
+        padding: 14px 25px;
     }
 
-    .modal-content {
-        width: 400px;
+    main {
+        margin-top: 120px; /* Ajusta margem para novo header */
     }
 
-    .modal-button {
-        font-size: 18px;
-        padding: 12px 24px;
+    main h2 {
+        font-size: 32px;
+        margin: 30px 50px;
     }
 
     .publications-grid {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        padding: 30px 50px;
     }
 
     .publication {
@@ -308,5 +483,253 @@ main h2 {
 
     .user-name {
         font-size: 15px;
+    }
+
+    /* Modal de Detalhes */
+    .modal-content.recipe-detail-content {
+        max-width: 800px;
+        padding: 40px;
+    }
+
+    .detail-recipe-image {
+        height: 300px;
+    }
+
+    .recipe-detail-content h3 {
+        font-size: 32px;
+    }
+
+    .detail-user-avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .detail-user-name {
+        font-size: 18px;
+    }
+
+    .recipe-detail-content p {
+        font-size: 17px;
+    }
+
+    .recipe-detail-content h4 {
+        font-size: 24px;
+    }
+
+    .multiline-text {
+        padding: 20px;
+        font-size: 16px;
+    }
+}
+
+/* Para telas de laptops grandes e desktops (>= 1024px) */
+@media screen and (min-width: 1024px) {
+    header {
+        width: calc(100% - 80px);
+        padding: 20px 40px;
+        height: 120px; /* Aumenta a altura do header */
+    }
+
+    .header-left .logo {
+        height: 130px;
+        width: 130px;
+    }
+
+    .header-center .search-bar {
+        width: 750px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .profile-picture {
+        width: 70px;
+        height: 70px;
+    }
+
+    .menu-dropdown {
+        min-width: 220px;
+    }
+
+    .menu-item {
+        font-size: 18px;
+        padding: 16px 30px;
+    }
+
+    main {
+        margin-top: 150px; /* Ajusta margem para novo header */
+    }
+
+    main h2 {
+        font-size: 36px;
+        margin: 40px 60px;
+    }
+
+    .publications-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Mais colunas ou cards maiores */
+        gap: 35px;
+        padding: 40px 60px;
+    }
+
+    .publication {
+        height: 420px;
+    }
+
+    .image-container {
+        height: 250px;
+    }
+
+    .user-overlay {
+        padding: 10px 18px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .user-name {
+        font-size: 16px;
+    }
+
+    /* Modal de Detalhes */
+    .modal-content.recipe-detail-content {
+        max-width: 900px;
+        padding: 50px;
+    }
+
+    .detail-recipe-image {
+        height: 350px;
+    }
+
+    .recipe-detail-content h3 {
+        font-size: 36px;
+    }
+
+    .detail-user-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .detail-user-name {
+        font-size: 20px;
+    }
+
+    .recipe-detail-content p {
+        font-size: 18px;
+    }
+
+    .recipe-detail-content h4 {
+        font-size: 26px;
+    }
+
+    .multiline-text {
+        padding: 25px;
+        font-size: 17px;
+    }
+}
+
+/* Para telas de MacBooks e Ultra-Wides (>= 1440px) */
+@media screen and (min-width: 1440px) {
+    header {
+        width: calc(100% - 100px);
+        padding: 25px 50px;
+        height: 140px; /* Altura ainda maior do header */
+    }
+
+    .header-left .logo {
+        height: 150px;
+        width: 150px;
+    }
+
+    .header-center .search-bar {
+        width: 900px;
+        height: 50px;
+        font-size: 19px;
+    }
+
+    .profile-picture {
+        width: 80px;
+        height: 80px;
+    }
+
+    .menu-dropdown {
+        min-width: 250px;
+    }
+
+    .menu-item {
+        font-size: 19px;
+        padding: 18px 35px;
+    }
+
+    main {
+        margin-top: 170px; /* Ajusta margem para novo header */
+    }
+
+    main h2 {
+        font-size: 40px;
+        margin: 50px 70px;
+    }
+
+    .publications-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Cards ainda maiores */
+        gap: 40px;
+        padding: 50px 70px;
+    }
+
+    .publication {
+        height: 480px;
+    }
+
+    .image-container {
+        height: 280px;
+    }
+
+    .user-overlay {
+        padding: 12px 20px;
+    }
+
+    .user-avatar {
+        width: 45px;
+        height: 45px;
+    }
+
+    .user-name {
+        font-size: 17px;
+    }
+
+    /* Modal de Detalhes */
+    .modal-content.recipe-detail-content {
+        max-width: 1000px;
+        padding: 60px;
+    }
+
+    .detail-recipe-image {
+        height: 400px;
+    }
+
+    .recipe-detail-content h3 {
+        font-size: 40px;
+    }
+
+    .detail-user-avatar {
+        width: 70px;
+        height: 70px;
+    }
+
+    .detail-user-name {
+        font-size: 22px;
+    }
+
+    .recipe-detail-content p {
+        font-size: 19px;
+    }
+
+    .recipe-detail-content h4 {
+        font-size: 28px;
+    }
+
+    .multiline-text {
+        padding: 30px;
+        font-size: 18px;
     }
 }

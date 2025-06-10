@@ -39,9 +39,27 @@
     <main>
         <h2>PUBLICAÇÕES</h2>
         <div class="publications-grid">
-            <!-- Cards de receitas serão inseridos aqui -->
-        </div>
+            </div>
     </main>
+
+    <div id="recipeDetailModal" class="modal">
+        <div class="modal-content recipe-detail-content">
+            <span class="close-button" id="closeRecipeDetailModal">&times;</span>
+            <img id="detailRecipeImage" class="detail-recipe-image" src="" alt="Imagem da Receita">
+            <h3 id="detailRecipeTitle"></h3>
+            <div class="detail-user-info">
+                <img id="detailUserAvatar" class="detail-user-avatar" src="" alt="Avatar do Usuário">
+                <span id="detailUserName" class="detail-user-name"></span>
+            </div>
+            <p><strong>Dificuldade:</strong> <span id="detailRecipeDifficulty"></span></p>
+            <p><strong>Tempo de Preparo:</strong> <span id="detailRecipeTime"></span></p>
+            <p><strong>Publicado em:</strong> <span id="detailRecipeDate"></span></p>
+            <h4>Ingredientes:</h4>
+            <p id="detailRecipeIngredients" class="multiline-text"></p>
+            <h4>Modo de Preparo:</h4>
+            <p id="detailRecipeInstructions" class="multiline-text"></p>
+        </div>
+    </div>
 
     <div id="logoutModal" class="modal">
         <div class="modal-content">

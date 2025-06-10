@@ -3,44 +3,108 @@
 /* Reset básico e fontes */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #f0f0f0; /* Cor de fundo neutra para combinar com o header */
     margin: 0;
     padding: 0;
     color: #333;
 }
 
+/* ======= Header ======= */
 header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Padding interno, controla o espaçamento lateral */
     background-color: #fec56c;
-    color: #FFFADC;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Fixa o header no topo */
+    top: 0;
+    left: 0; /* Estica para a esquerda */
+    right: 0; /* Estica para a direita */
+    z-index: 1000; /* Garante que fique acima de outros elementos */
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
+    color: #FFFADC;
+    box-sizing: border-box; /* Inclui padding e border na largura */
+    height: 80px; /* Altura padrão do cabeçalho reduzida */
 }
 
+.header-left .logo {
+    height: 70px; /* Reduzindo a altura da logo */
+    width: 70px; /* Reduzindo a largura da logo */
+}
+
+.header-center {
+    flex-grow: 1; /* Permite que o texto "Publicar Receita" ocupe o espaço central */
+    text-align: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    position: relative; /* Para posicionar o dropdown */
+    gap: 10px;
+}
+
+.profile-picture {
+    width: 40px; /* Reduzindo a largura da foto de perfil */
+    height: 40px; /* Reduzindo a altura da foto de perfil */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #FFFADC;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.profile-picture:hover {
+    transform: scale(1.05);
+}
+
+.menu-dropdown {
+    display: none; /* Oculto por padrão */
+    position: absolute;
+    top: 100%; /* Abaixo da foto de perfil */
+    right: 0;
+    background-color: #FFFADC;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1100; /* Acima do header e outros conteúdos */
+    min-width: 180px;
+    overflow: hidden;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: #325862;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menu-item i {
+    margin-right: 12px;
+    color: #fec56c; /* Cor para os ícones */
+}
+
+.menu-item:hover {
+    background-color: #f0f0f0;
+    color: #27474f;
+}
+
+/* Garante que o conteúdo principal não fique por baixo do cabeçalho fixo */
 main {
-    max-width: 600px; /* Default for smaller screens */
-    margin: 40px auto;
+    margin-top: 120px; /* Aumentado para mover o formulário para baixo (antes 100px) */
+    max-width: 600px; /* Largura padrão para telas menores */
+    margin-left: auto; /* Centraliza */
+    margin-right: auto; /* Centraliza */
     padding: 20px;
     background-color: #FFFADC;
     border: 2px solid black;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-/* Adicionando largura máxima ao card das receitas */
-/* This rule seems out of place for publicarReceita.css as it targets 'card-receita' */
-/* If this CSS file is only for publicarReceita.html, you might want to remove or relocate this. */
-/* If it's a global CSS, then it's fine, but its effect here would be minimal without a .card-receita element. */
-.card-receita {
-    max-width: 50%; /* ajuste o valor conforme desejado */
-    width: 100%;
-    margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    background-color: #fff;
-    padding: 15px;
 }
 
 form {
@@ -63,6 +127,7 @@ textarea {
     font-size: 16px;
     padding: 10px;
     background-color: #325862;
+    border: 1px solid #325862;
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
@@ -73,7 +138,7 @@ textarea {
 
 input::placeholder,
 select,
-textarea::placeholder{
+textarea::placeholder {
     color: #ffffff;
 }
 
@@ -95,6 +160,7 @@ input[type="file"] {
     background-color: #325862;
     color: #ffffff;
     padding: 8px;
+    border: 1px solid #325862;
     border-radius: 5px;
     font-family: inherit;
     cursor: pointer;
@@ -109,16 +175,17 @@ input[type="file"]:focus {
     box-shadow: 0 0 5px rgba(50,88,98,0.5);
 }
 
-/* Preview da imagem */
+/* Pré-visualização da imagem */
 #preview-container {
     margin-top: 10px;
     max-height: 200px;
     overflow: hidden;
     border-radius: 8px;
-    display: flex; /* Added for centering */
-    justify-content: center; /* Added for centering */
-    align-items: center; /* Added for centering */
-    background-color: #eee; /* Added a subtle background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
 }
 
 #imagePreview {
@@ -129,7 +196,7 @@ input[type="file"]:focus {
     object-fit: contain;
 }
 
-/* Botão enviar */
+/* Botão de envio */
 button[type="submit"] {
     background-color: #982829;
     color: #ffffff;
@@ -143,10 +210,10 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #27474f;
+    background-color: #27474f; /* Um tom mais escuro para o hover */
 }
 
-/* Toast container */
+/* ======= Toast Container e Estilo ======= */
 .toast-container {
     position: fixed;
     top: 20px;
@@ -156,10 +223,9 @@ button[type="submit"]:hover {
     flex-direction: column;
     gap: 10px;
     max-width: 320px;
-    pointer-events: none; /* Permitir clique somente nos toasts */
+    pointer-events: none;
 }
 
-/* Toast estilo */
 .toast {
     pointer-events: auto;
     display: flex;
@@ -213,7 +279,8 @@ button[type="submit"]:hover {
     color: white;
     outline: none;
 }
-/* Animações */
+
+/* Animações dos Toasts */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -236,50 +303,176 @@ button[type="submit"]:hover {
     }
 }
 
-/* --- Media Queries for Responsiveness --- */
+/* ======= Modal de Logout ======= */
+.modal {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Acima de tudo */
+    animation: fadeInModal 0.3s ease-out forwards;
+}
 
-/* For screens larger than 768px (common tablet and small laptop sizes) */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: slideInFromTop 0.4s ease-out forwards;
+}
+
+.modal-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+.modal-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.modal-button.confirm {
+    background-color: #d9534f;
+    color: white;
+}
+
+.modal-button.cancel {
+    background-color: #5bc0de;
+    color: white;
+}
+
+.modal-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.modal-button:active {
+    transform: translateY(0);
+}
+
+/* Animações do Modal */
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+
+/* --- Media Queries (Responsividade) --- */
+
+/* Para telas de tablets e laptops pequenos (>= 768px) */
 @media (min-width: 768px) {
-    main {
-        max-width: 750px; /* Increase main content width */
-        padding: 30px; /* More padding */
+    header {
+        padding: 15px 30px;
+        font-size: 24px;
+        height: 90px;
     }
 
-    header {
-        font-size: 28px; /* Slightly larger header font */
+    .header-left .logo {
+        height: 80px;
+        width: 80px;
+    }
+
+    .profile-picture {
+        width: 50px;
+        height: 50px;
+    }
+
+    .menu-dropdown {
+        min-width: 200px;
+    }
+
+    .menu-item {
+        font-size: 17px;
+        padding: 14px 25px;
+    }
+
+    main {
+        margin-top: 140px; /* Aumentado para mover o formulário para baixo */
+        max-width: 750px;
+        padding: 30px;
     }
 
     label {
-        font-size: 17px; /* Slightly larger label font */
+        font-size: 17px;
     }
 
     input[type="text"],
     select,
     textarea {
-        padding: 12px; /* Increase input padding */
+        padding: 12px;
         font-size: 17px;
     }
 
     button[type="submit"] {
-        padding: 18px; /* Larger button */
+        padding: 18px;
         font-size: 20px;
+    }
+
+    .modal-content {
+        width: 350px;
     }
 }
 
-/* For screens larger than 1024px (common laptop and desktop sizes) */
+/* Para telas de laptops grandes e desktops (>= 1024px) */
 @media (min-width: 1024px) {
+    header {
+        padding: 20px 40px;
+        height: 100px;
+        font-size: 28px;
+    }
+
+    .header-left .logo {
+        height: 90px;
+        width: 90px;
+    }
+
+    .profile-picture {
+        width: 60px;
+        height: 60px;
+    }
+
+    .menu-dropdown {
+        min-width: 220px;
+    }
+
+    .menu-item {
+        font-size: 18px;
+        padding: 16px 30px;
+    }
+
     main {
-        max-width: 850px; /* Further increase main content width for larger screens */
+        margin-top: 160px; /* Aumentado para mover o formulário para baixo */
+        max-width: 850px;
         padding: 40px;
     }
 
-    header {
-        font-size: 32px; /* Even larger header */
-        padding: 25px;
-    }
-
     form {
-        gap: 20px; /* More space between form elements */
+        gap: 20px;
     }
 
     label {
@@ -299,22 +492,48 @@ button[type="submit"]:hover {
     }
 
     #preview-container {
-        max-height: 250px; /* Slightly larger preview area */
+        max-height: 250px;
     }
 
     #imagePreview {
         max-height: 250px;
     }
+
+    .modal-content {
+        width: 400px;
+    }
 }
 
+/* Para telas de MacBooks e Ultra-Wides (>= 1280px) */
 @media (min-width: 1280px) {
-    main {
-        max-width: 960px; /* Optimal width for very large screens */
+    header {
+        padding: 25px 50px;
+        height: 110px;
+        font-size: 30px;
     }
 
-    header {
-        font-size: 36px;
-        padding: 30px;
+    .header-left .logo {
+        height: 100px;
+        width: 100px;
+    }
+
+    .profile-picture {
+        width: 70px;
+        height: 70px;
+    }
+
+    .menu-dropdown {
+        min-width: 250px;
+    }
+
+    .menu-item {
+        font-size: 19px;
+        padding: 18px 35px;
+    }
+
+    main {
+        margin-top: 170px; /* Aumentado para mover o formulário para baixo */
+        max-width: 960px;
     }
 
     label {
@@ -332,7 +551,7 @@ button[type="submit"]:hover {
     }
 
     #preview-container {
-        max-height: 300px; /* Even larger preview area */
+        max-height: 300px;
     }
 
     #imagePreview {

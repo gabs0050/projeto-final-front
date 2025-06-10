@@ -39,9 +39,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 return receita.usuario.some(u => u.id === user.id || u.id === user.id_usuario)
             })
 
-            // Verificar o resultado do filtro
-            console.log('Receitas do usuário logado:', receitasDoUsuario)
-
             return receitasDoUsuario || []
         } catch (error) {
             console.error(error)

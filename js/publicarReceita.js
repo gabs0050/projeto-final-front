@@ -4,11 +4,17 @@
 import { storage } from './firebaseConfig.js'
 import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-storage.js"
 
-// Sobrescreve console.log para evitar logs no console
+// Sobrescreve console.log para evitar logs no console (mantido como no seu código)
 // console.log = function() {}
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Toast container
+    // 1. Referências aos Elementos do DOM
+    const fotoReceitaInput = document.getElementById('foto_receita') // ID do input de arquivo
+    const imagePreview = document.getElementById('imagePreview')    // ID da tag <img> de preview
+    const previewContainer = document.getElementById('preview-container') // ID do container do preview
+    const form = document.getElementById('recipeForm')               // ID do formulário principal
+    
+    // Elementos do Toast
     let toastContainer = document.querySelector('.toast-container')
     if (!toastContainer) {
         toastContainer = document.createElement('div')
@@ -16,7 +22,16 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(toastContainer)
     }
 
-    // Função para exibir toast (tipo: error, success, info)
+    // Elementos do Header/Menu
+    const menuButton = document.getElementById("menuButton") // ID da foto de perfil que abre o menu
+    const menuDropdown = document.getElementById("menuDropdown") // ID do menu dropdown
+    const logoutModal = document.getElementById("logoutModal") // ID do modal de logout
+    const confirmLogout = document.getElementById("confirmLogout") // Botão de confirmar logout
+    const cancelLogout = document.getElementById("cancelLogout") // Botão de cancelar logout
+    const logoutLink = document.querySelector('.menu-item[href="../index.html"]') // Link "Sair da conta" no dropdown
+
+
+    // 2. Função para exibir toast (tipo: error, success, info)
     function showToast(message, type = 'error') {
         const toast = document.createElement('div')
         toast.className = `toast ${type}`
@@ -32,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'info':
                 icon.className = 'fas fa-info-circle'
                 break
-            default:
-                icon.className = 'fas fa-exclamation-triangle'
+            default: // Para 'error'
+                icon.className = 'fas fa-exclamation-triangle' // Ícone de alerta (mantido como estava no seu código)
         }
         icon.setAttribute('aria-hidden', 'true')
 
@@ -61,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500)
         })
 
+        // Remove o toast automaticamente após 5 segundos
         setTimeout(() => {
             if (toastContainer.contains(toast)) {
                 toast.style.animation = 'fadeOut 0.5s ease forwards'
@@ -73,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000)
     }
 
-    // Obter usuário autenticado do localStorage
+    // 3. Obter usuário autenticado do localStorage
     function getAuthenticatedUser() {
         try {
             if (!window.localStorage) {
@@ -95,11 +111,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } catch (error) {
             showToast('Erro ao carregar dados do usuário. Faça login novamente.', 'error')
+            console.error("Erro ao carregar dados do usuário do localStorage:", error); // Log para debug
             return null
         }
     }
 
-    // Mostrar erro sessão e redirecionar
+    // 4. Mostrar erro de sessão e redirecionar
     function showSessionError() {
         showToast('Sessão expirada ou inválida. Você será redirecionado para o login.', 'error')
         setTimeout(() => {
@@ -107,38 +124,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 2000)
     }
 
-    // Validar dados obrigatórios da receita
+    // 5. Validar dados obrigatórios da receita
     function validateRecipeData(data) {
-        const required = ['titulo', 'tempo_preparo', 'ingrediente', 'modo_preparo', 'dificuldade', 'foto_receita']
+        // NOVO: 'categoria' adicionada aos campos obrigatórios
+        const required = ['titulo', 'tempo_preparo', 'ingrediente', 'modo_preparo', 'dificuldade', 'categoria', 'foto_receita']
         for (const field of required) {
-            if (!data[field] || data[field].trim() === '') {
-                showToast(`O campo "${field.replace('_', ' ')}" é obrigatório!`, 'error')
-                return false
+            // Verifica se o campo é nulo, vazio, ou se o valor de select é o placeholder "Selecione"
+            if (!data[field] || String(data[field]).trim() === '' || data[field] === 'Selecione') {
+                const friendlyFieldName = field.replace('_', ' ').replace(/\b\w/g, char => char.toUpperCase()); // Formata para "Nome Amigável"
+                showToast(`O campo "${friendlyFieldName}" é obrigatório!`, 'error');
+                return false;
             }
         }
-        return true
+        return true;
     }
 
-    // Preview da imagem selecionada
-    const fotoReceitaInput = document.getElementById('foto_receita')
-    const imagePreview = document.getElementById('imagePreview')
-
+    // 6. Preview da imagem selecionada
     fotoReceitaInput.addEventListener('change', () => {
         const file = fotoReceitaInput.files[0]
         if (file) {
             const reader = new FileReader()
             reader.onload = e => {
                 imagePreview.src = e.target.result
-                imagePreview.style.display = 'block'
+                imagePreview.style.display = 'block' // Mostra a imagem
+                previewContainer.style.display = 'flex' // Garante que o container esteja visível
             }
             reader.readAsDataURL(file)
         } else {
             imagePreview.src = ''
-            imagePreview.style.display = 'none'
+            imagePreview.style.display = 'none' // Esconde a imagem
+            previewContainer.style.display = 'none' // Esconde o container
         }
     })
 
-    // Validação e envio do formulário
+    // 7. Validação e envio do formulário
     const user = getAuthenticatedUser()
     
     if (!user) {
@@ -152,8 +171,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return
     }
 
-    const form = document.getElementById('recipeForm')
     if (!form) {
+        console.error("Erro: Formulário 'recipeForm' não encontrado no DOM.");
         return
     }
 
@@ -162,18 +181,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const file = fotoReceitaInput.files[0]
         if (!file) {
-            showToast('Por favor, escolha uma imagem.', 'error')
+            showToast('Por favor, escolha uma imagem para a receita.', 'error')
             return
         }
 
-        // Construir dados para validação (com o link foto vazio momentaneamente)
+        // Construir dados para validação (com o link foto vazio momentaneamente e categoria)
         const dataToValidate = {
             titulo: form.titulo.value,
+            // Certifique-se de que os IDs dos inputs no HTML são 'tempo_preparo', 'ingrediente', 'modo_preparo'
             tempo_preparo: form.tempo_preparo.value,
             ingrediente: form.ingrediente.value,
             modo_preparo: form.modo_preparo.value,
             dificuldade: form.dificuldade.value,
-            foto_receita: 'dummy' // só pra passar na validação
+            categoria: form.categoria.value, // NOVO: Campo categoria
+            foto_receita: 'dummy' // Placeholder para passar na validação de preenchimento
+        }
+        
+        // Validação adicional para o campo de categoria (se for um select)
+        if (dataToValidate.categoria === '' || dataToValidate.categoria === 'Selecione') {
+            showToast('Por favor, selecione uma categoria para a receita.', 'error');
+            return;
         }
 
         if (!validateRecipeData(dataToValidate)) {
@@ -195,6 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ingrediente: form.ingrediente.value.trim(),
                 modo_preparo: form.modo_preparo.value.trim(),
                 dificuldade: form.dificuldade.value,
+                categoria: form.categoria.value, // NOVO: Incluindo a categoria nos dados enviados para a API
                 id_usuario: userId
             }
 
@@ -211,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
                     if (!response.ok) {
                         const errorData = await response.json();
-                        throw new Error(errorData.message || 'Erro ao salvar receita no banco de dados');
+                        throw new Error(errorData.message || `Erro do servidor: ${response.status}`);
                     }
             
                     return await response.json();
@@ -220,23 +248,77 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            // Enviar para a função de salvar receita (defina essa função no firebaseConfig.js ou aqui)
-            // Exemplo fictício:
             const response = await salvarReceitaNoBanco(recipeData);
             console.log('Receita salva com ID:', response.id); // Opcional - para debug
 
             showToast('Receita publicada com sucesso!', 'success')
-            form.reset()
-            imagePreview.src = ''
-            imagePreview.style.display = 'none'
+            form.reset() // Limpa o formulário
+            imagePreview.src = '' // Limpa a pré-visualização da imagem
+            imagePreview.style.display = 'none' // Esconde a imagem de preview
+            previewContainer.style.display = 'none' // Esconde o container do preview
 
             setTimeout(() => {
-                window.location.href = '../src/home.html'
+                window.location.href = '../src/home.html' // Redireciona para a home
             }, 1500)
 
         } catch (error) {
             showToast('Erro ao publicar receita: ' + error.message, 'error')
-            // console.error('Erro ao publicar receita:', error)
+            console.error('Erro ao publicar receita:', error) // Log de erro detalhado
         }
     })
-})
+
+    // 8. Lógica do Menu de Perfil (Dropdown)
+    // Verifica se o menuButton existe antes de adicionar o listener
+    if (menuButton) {
+        menuButton.addEventListener("click", (event) => {
+            event.stopPropagation() // Impede que o clique se propague e feche o dropdown imediatamente
+            const isVisible = menuDropdown.style.display === "block"
+            menuDropdown.style.display = isVisible ? "none" : "block"
+        })
+    }
+
+
+    // Fecha o dropdown se clicar fora dele
+    document.addEventListener("click", (event) => {
+        if (menuButton && menuDropdown && !menuButton.contains(event.target) && !menuDropdown.contains(event.target)) {
+            menuDropdown.style.display = "none"
+        }
+    })
+
+    // 9. Lógica do Modal de Logout
+    // Verifica se o logoutLink existe antes de adicionar o listener
+    if (logoutLink) {
+        logoutLink.addEventListener("click", (event) => {
+            event.preventDefault() // Impede o redirecionamento imediato
+            if (logoutModal) { // Verifica se o modal existe
+                logoutModal.style.display = "flex" // Mostra o modal de logout
+            }
+        })
+    }
+
+    // Verifica se os botões de confirmar/cancelar logout existem antes de adicionar listeners
+    if (confirmLogout) {
+        confirmLogout.addEventListener("click", () => {
+            localStorage.removeItem('accessToken') // Remove o token de acesso
+            window.location.href = "../index.html" // Redireciona para o login
+        })
+    }
+
+    if (cancelLogout) {
+        cancelLogout.addEventListener("click", () => {
+            if (logoutModal) { // Verifica se o modal existe
+                logoutModal.style.display = "none" // Esconde o modal de logout
+            }
+        })
+    }
+
+    // 10. Atualiza a Foto de Perfil no Header (se houver uma URL no user object)
+    // Certifica-se de que 'user' e 'menuButton' existem
+    if (user && menuButton) {
+        if (user.foto_perfil && user.foto_perfil !== "undefined" && user.foto_perfil !== "") {
+            menuButton.src = user.foto_perfil
+        } else {
+            menuButton.src = "../src/img/low-profile.webp" // Imagem padrão se não houver foto
+        }
+    }
+});

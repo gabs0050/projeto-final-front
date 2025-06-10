@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurar Perfil</title>
+    <link rel="stylesheet" href="../css/configurarPerfil.css">
+    <link rel="shortcut icon" href="../src/img/logo-sem-fundo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script type="module" src="../js/configurarPerfil.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <a href="home.html"> <img src="../src/img/imgLogo.jpg" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="header-center">
+            </div>
+        <div class="header-right">
+            <img src="../src/img/low-profile.webp" alt="Foto de Perfil" class="profile-picture" id="menuButton">
+            <div class="menu-dropdown" id="menuDropdown">
+                <a href="../src/perfil.html" class="menu-item">
+                    <i class="fas fa-user"></i> Perfil
+                </a>
+                <a href="../src/configurarPerfil.html" class="menu-item">
+                    <i class="fas fa-user-edit"></i> Editar Usuário
+                </a>
+                <a href="../src/publicarReceita.html" class="menu-item">
+                    <i class="fas fa-paper-plane"></i> Publicar Receita
+                </a>
+                <a href="../index.html" class="menu-item" id="logoutButton">
+                    <i class="fas fa-sign-out-alt"></i> Sair da conta
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="profile-update-container">
+            <h2>Atualizar Perfil</h2>
+            <form id="updateProfileForm">
+                <div class="form-group avatar-upload">
+                    <img id="profileImagePreview" src="../src/img/low-profile.webp" alt="Foto de Perfil Atual" class="profile-image-preview">
+                    <label for="profileImageInput" class="upload-button">
+                        <i class="fas fa-camera"></i> Alterar Foto
+                        <input type="file" id="profileImageInput" accept="image/*">
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="nome_usuario">Nome de Usuário:</label>
+                    <input type="text" id="nome_usuario" name="nome_usuario" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Nova Senha (deixe em branco para não alterar):</label>
+                    <input type="password" id="senha" name="senha">
+                </div>
+
+                <div class="form-group">
+                    <label for="palavra_chave">Palavra-Chave de Recuperação:</label>
+                    <input type="text" id="palavra_chave" name="palavra_chave" required>
+                </div>
+
+                <button type="submit" class="submit-button">Salvar Alterações</button>
+            </form>
+        </div>
+    </main>
+
+    <div class="toast-container"></div>
+
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <p>Tem certeza que deseja sair da sua conta?</p>
+            <div class="modal-buttons">
+                <button id="confirmLogout" class="modal-button confirm">Sair</button>
+                <button id="cancelLogout" class="modal-button cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
