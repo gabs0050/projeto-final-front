@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home - Receitas Deliciosas</title>
     <link rel="stylesheet" href="../css/home.css">
-    <link rel="shortcut icon" href="../src/img/logo-sem-fundo.png">
+    <link rel="shortcut icon" href="../src/img/logo-sem-fundo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="../js/home.js" defer></script>
 </head>
 <body>
     <header>
         <div class="header-left">
-            <img src="../src/img/imgLogo.jpg" alt="Logo" class="logo">
+            <img src="../src/img/imgLogo.jpg" alt="Logo do Receitas Deliciosas" class="logo">
         </div>
         <div class="header-center">
             <input type="text" placeholder="Buscar receitas..." class="search-bar">
         </div>
         <div class="header-right">
-            <img src="../src/img/low-profile.webp" alt="Foto de Perfil" class="profile-picture" id="menuButton">
+            <img src="../src/img/low-profile.webp" alt="Foto de Perfil do Usuário" class="profile-picture" id="menuButton">
             <div class="menu-dropdown" id="menuDropdown">
                 <a href="../src/perfil.html" class="menu-item">
                     <i class="fas fa-user"></i> Perfil
@@ -29,7 +29,7 @@
                 <a href="../src/publicarReceita.html" class="menu-item">
                     <i class="fas fa-paper-plane"></i> Publicar Receita
                 </a>
-                <a href="../index.html" class="menu-item">
+                <a href="../index.html" class="menu-item" id="logoutLink">
                     <i class="fas fa-sign-out-alt"></i> Sair da conta
                 </a>
             </div>
@@ -62,7 +62,7 @@
     </div>
 
     <div id="logoutModal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content logout-modal-content">
             <p>Tem certeza que deseja sair da sua conta?</p>
             <div class="modal-buttons">
                 <button id="confirmLogout" class="modal-button confirm">Sair</button>

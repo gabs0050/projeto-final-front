@@ -1,262 +1,638 @@
+/* ======= Estilo Geral ======= */
 body {
     font-family: Arial, sans-serif;
-    background-color: #fec56c;
+    background-color: #f0f0f0; /* Fundo mais claro para contrastar com o header */
     margin: 0;
     padding: 0;
     color: #333;
+    line-height: 1.6;
 }
 
+/* Garante que o conteúdo não fique por baixo do cabeçalho fixo */
+main {
+    margin-top: 80px; /* Espaço reduzido para o header fixo */
+    padding: 15px; /* Padding geral reduzido para o conteúdo principal */
+    text-align: center; /* Centraliza o conteúdo dentro do main */
+}
+
+/* ======= Header ======= */
 header {
-    background-color: #fec56c;
-    padding: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    color: #fff;
+    width: calc(100% - 30px); /* Padding lateral reduzido */
+    padding: 8px 15px; /* Padding reduzido */
+    background-color: #fec56c;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
+.header-left .logo {
+    height: 80px; /* Logo menor */
+    width: 80px; /* Logo menor */
+}
 
-.profile-header {
+.header-center h1 {
+    margin: 0;
+    color: #FFFADC;
+    font-size: 26px; /* Tamanho do título "Perfil" reduzido */
+}
+
+.header-right {
     display: flex;
-    width: 100vw;
+    align-items: center;
+    position: relative;
+    gap: 8px; /* Espaçamento reduzido */
+}
+
+.profile-picture { /* Foto de perfil no header */
+    width: 40px; /* Foto de perfil menor */
+    height: 40px; /* Foto de perfil menor */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #FFFADC; /* Borda mais fina */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.profile-picture:hover {
+    transform: scale(1.05);
+}
+
+.menu-dropdown {
+    display: none;
+    position: absolute;
+    top: 90%; /* Ajuste para o tamanho menor da foto */
+    right: 0;
+    background-color: #FFFADC;
+    border: 1px solid #eee;
+    border-radius: 4px; /* Raio menor */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+    z-index: 1100;
+    min-width: 150px; /* Largura mínima reduzida */
+    overflow: hidden;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px; /* Padding reduzido */
+    color: #325862;
+    text-decoration: none;
+    font-size: 14px; /* Fonte menor */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menu-item i {
+    margin-right: 10px; /* Margem reduzida */
+    color: #fec56c;
+}
+
+.menu-item:hover {
+    background-color: #f0f0f0;
+    color: #27474f;
+}
+
+/* ======= Conteúdo do Perfil ======= */
+.profile-content {
+    display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 10px;
+    gap: 15px; /* Espaçamento reduzido */
+    margin: 20px auto; /* Margem reduzida */
+    max-width: 500px; /* Largura máxima reduzida */
+    background-color: #fefefe;
+    padding: 25px; /* Padding reduzido */
+    border-radius: 8px; /* Raio menor */
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07); /* Sombra mais suave */
 }
 
-.profile-info {
+.profile-info-main {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 10px; /* Espaçamento reduzido */
+    width: 100%;
 }
 
-.profile-picture {
-    width: 120px;
-    height: 120px;
+.profile-picture-main { /* Foto de perfil grande no corpo da página */
+    width: 120px; /* Foto principal menor */
+    height: 120px; /* Foto principal menor */
     border-radius: 50%;
-    border: 2px solid #fff;
+    border: 3px solid #fec56c; /* Borda mais fina */
     object-fit: cover;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08); /* Sombra mais suave */
 }
 
-.profile-details h1 {
+.profile-details-main h1 {
     margin: 0;
-    font-size: 28px;
-    color: #fff;
+    font-size: 28px; /* Título do nome menor */
+    color: #333;
 }
 
-.profile-details p {
-    margin: 0;
-    font-size: 18px;
-    color: #fff;
+.profile-details-main p {
+    margin: 3px 0 0; /* Margem reduzida */
+    font-size: 16px; /* Fonte menor */
+    color: #666;
 }
 
-.profile-actions {
+.profile-actions-main {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* Espaçamento reduzido */
+    margin-top: 15px; /* Margem reduzida */
+    width: 100%;
 }
 
 .action-button {
     background-color: #a52a2a;
     color: #fff;
     border: none;
-    padding: 10px 25px;
-    border-radius: 5px;
+    padding: 10px 20px; /* Padding reduzido */
+    border-radius: 5px; /* Raio menor */
     cursor: pointer;
-    font-size: 14px;
+    font-size: 14px; /* Fonte menor */
     text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .action-button:hover {
     background-color: #8b0000;
+    transform: translateY(-1px); /* Transform reduzido */
 }
 
-.edit-profile {
-    margin-top: 10px;
-    color: #fff;
+.edit-profile-main {
+    display: flex;
+    align-items: center;
+    margin-top: 15px; /* Margem reduzida */
+    color: #325862;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 16px; /* Fonte menor */
+    transition: color 0.2s ease;
 }
 
-.edit-profile:hover {
+.edit-profile-main:hover {
+    color: #27474f;
     text-decoration: underline;
 }
 
-.edit-profile i {
-    margin-right: 5px;
-    color: #a52a2a;
-    font-size: 30px;
+.edit-profile-main i {
+    margin-right: 6px; /* Margem reduzida */
+    color: #fec56c;
+    font-size: 20px; /* Ícone menor */
 }
 
-main {
-    padding: 20px;
-    margin-top: 0; /* Remove espaçamento extra no topo */
-}
-
-h2 {
+/* ======= Título da Página de Publicações ======= */
+main h2 {
     text-align: left;
-    color: #fff;
-    font-size: 30px;
-    margin-top: -20px;
+    color: #333;
+    font-size: 26px; /* Título h2 menor */
+    margin: 30px 0 15px 15px; /* Margem reduzida */
+    padding-bottom: 8px; /* Padding reduzido */
+    border-bottom: 1px solid #fec56c; /* Borda mais fina */
+    display: inline-block;
 }
 
+/* ======= Grid de Publicações ======= */
 .publications-grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 15px;
-    margin-top: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Minmax menor */
+    gap: 20px; /* Espaçamento reduzido */
+    padding: 0 15px 15px 15px; /* Padding reduzido */
+    max-width: 1000px; /* Largura máxima reduzida */
+    margin: 0 auto;
 }
 
-.publication {
+.publication { /* Cards de publicação */
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 8px; /* Raio menor */
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-    height: 300px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08); /* Sombra mais suave */
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 320px; /* Altura do card reduzida */
 }
 
-.publication-date {
-    float: left;
-    margin-top: 15px;
+.publication:hover {
+    transform: translateY(-3px); /* Transform reduzido */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
 }
-
 
 .publication img {
     width: 100%;
-    height: 200px;
+    height: 180px; /* Altura da imagem no card reduzida */
     object-fit: cover;
 }
 
 .publication-info {
-    padding: 15px;
-    text-align: right; /* Move o texto e o ícone para o lado direito */
+    padding: 12px; /* Padding reduzido */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .publication-info h3 {
-    margin: 0;
-    font-size: 16px;
+    margin: 0 0 6px 0; /* Margem reduzida */
+    font-size: 17px; /* Fonte menor */
     color: #333;
+    font-weight: 600;
     text-align: left;
 }
 
-.publication::before {
-    /* Removed star icon */
-    content: none;
-}
-
-.publication-info p::after {
-    content: "\f017";
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 14px;
+.publication-date {
+    font-size: 12px; /* Fonte menor */
     color: #666;
-    margin-left: 5px;
-    display: inline;
-}
-
-.publication-info p {
-    display: inline-flex; /* Garante que o texto e o ícone fiquem alinhados horizontalmente */
+    margin-bottom: 6px; /* Margem reduzida */
+    display: flex;
     align-items: center;
-    gap: 5px;
-    justify-content: flex-end; /* Alinha o conteúdo à direita */
-    vertical-align: middle;
+    gap: 4px; /* Espaçamento reduzido */
+    text-align: right;
+    justify-content: flex-end;
 }
 
-.publication-info p::after {
-    content: "\f017";
-    font-family: "Font Awesome 5 Free";
+.publication-date::before {
+    content: "\f073";
+    font-family: "Font Awesome 6 Free";
     font-weight: 900;
-    font-size: 14px;
+    font-size: 13px; /* Ícone menor */
     color: #666;
-    margin-left: 5px;
-    display: inline-flex;
-    align-items: center;
-    vertical-align: middle;
 }
 
-@media screen and (min-width: 1280px) {
-    body {
-        font-size: 18px;
+.publication-info p { /* Tempo de preparo */
+    margin: 0;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Espaçamento reduzido */
+    margin-top: auto;
+    padding-top: 6px; /* Padding reduzido */
+    border-top: 1px solid #f5f5f5;
+    font-size: 14px; /* Fonte menor */
+    justify-content: flex-end;
+}
+
+.publication-info p::before {
+    content: "\f017";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 13px; /* Ícone menor */
+    color: #666;
+}
+
+.modal {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Acima de tudo */
+    animation: fadeInModal 0.3s ease-out forwards;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    position: relative; /* Para o botão de fechar */
+    animation: slideInFromTop 0.4s ease-out forwards;
+    max-height: 90vh; /* Limita a altura para que o conteúdo não estoure a tela */
+    overflow-y: auto; /* Habilita scroll se o conteúdo for muito grande */
+}
+
+.logout-modal-content {
+    width: 280px; /* Largura reduzida */
+    padding: 25px; /* Padding reduzido */
+}
+
+.logout-modal-content p {
+    font-size: 16px; /* Fonte menor */
+    margin-bottom: 20px; /* Margem reduzida */
+}
+
+.modal-buttons {
+    gap: 10px; /* Espaçamento reduzido */
+}
+
+.modal-button {
+    padding: 10px 20px; /* Padding reduzido */
+    border-radius: 5px; /* Raio menor */
+    font-size: 14px; /* Fonte menor */
+}
+
+/* ======= Media Queries (Responsividade) - Ajustes de Tamanho ======= */
+
+/* Para telas de tablets e laptops pequenos (>= 768px) */
+@media screen and (min-width: 768px) {
+    header {
+        width: calc(100% - 40px); /* Ajusta padding */
+        padding: 10px 20px; /* Ajusta padding */
     }
 
-    .profile-header {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 10px 80px;
+    .header-left .logo {
+        height: 90px; /* Ajuste */
+        width: 90px; /* Ajuste */
     }
-    .profile-info {
-        gap: 40px;
+
+    .header-center h1 {
+        font-size: 30px; /* Ajuste */
     }
 
     .profile-picture {
-        width: 150px;
-        height: 150px;
+        width: 45px; /* Ajuste */
+        height: 45px; /* Ajuste */
     }
 
-    .profile-actions {
-        width: 100%;
-        gap: 40px;
-        margin-top: 200px; /* Aumentado para mover os botões mais para baixo */
+    .menu-dropdown {
+        min-width: 160px; /* Ajuste */
     }
 
-    .profile-details h1 {
-        font-size: 36px;
-    }
-
-    .profile-details p {
-        font-size: 20px;
-    }
-
-    .action-button {
-        font-size: 16px;
-        padding: 15px 30px;
+    .menu-item {
+        font-size: 15px; /* Ajuste */
+        padding: 12px 18px; /* Ajuste */
     }
 
     main {
-        padding: 40px 80px;
+        margin-top: 90px; /* Ajuste */
     }
 
-    .publications-grid {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 30px;
+    .profile-content {
+        margin: 30px auto; /* Ajuste */
+        padding: 30px; /* Ajuste */
     }
 
-    .publication {
-        height: 350px;
+    .profile-picture-main {
+        width: 140px; /* Ajuste */
+        height: 140px; /* Ajuste */
     }
 
-    .publication img {
-        height: 250px;
+    .profile-details-main h1 {
+        font-size: 32px; /* Ajuste */
     }
 
-    .publication-info h3 {
-        font-size: 18px;
+    .profile-details-main p {
+        font-size: 17px; /* Ajuste */
     }
 
-    .publication-info p {
-        font-size: 16px;
-    }
-}
-
-@media screen and (min-width: 1280px) {
-    .profile-actions {
-        width: 100%;
-        gap: 40px;
+    .profile-actions-main {
+        gap: 15px; /* Ajuste */
+        margin-top: 20px; /* Ajuste */
     }
 
     .action-button {
-        font-size: 18px;
-        padding: 20px 40px;
-        border-radius: 10px;
+        padding: 11px 25px; /* Ajuste */
+        font-size: 15px; /* Ajuste */
     }
 
-    .edit-profile {
-        margin-top: -70px;
-        margin-right: -55px;
-        font-size: 23px;
-        padding: 15px 30px;
-        border-radius: 8px;
-        width: 250px;
+    .edit-profile-main {
+        margin-top: 20px; /* Ajuste */
+        font-size: 17px; /* Ajuste */
     }
-}      
+
+    .edit-profile-main i {
+        font-size: 22px; /* Ajuste */
+    }
+
+    main h2 {
+        font-size: 28px; /* Ajuste */
+        margin: 40px 0 20px 20px; /* Ajuste */
+    }
+
+    .publications-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajuste */
+        gap: 25px; /* Ajuste */
+        padding: 0 20px 20px 20px; /* Ajuste */
+    }
+
+    .publication {
+        height: 350px; /* Ajuste */
+    }
+
+    .publication img {
+        height: 200px; /* Ajuste */
+    }
+
+    .publication-info h3 {
+        font-size: 18px; /* Ajuste */
+    }
+
+    .publication-info p {
+        font-size: 15px; /* Ajuste */
+    }
+}
+
+/* Para telas de laptops grandes e desktops (>= 1024px) */
+@media screen and (min-width: 1024px) {
+    header {
+        width: calc(100% - 60px); /* Ajuste */
+        padding: 12px 30px; /* Ajuste */
+        height: 100px; /* Ajuste */
+    }
+
+    .header-left .logo {
+        height: 100px; /* Ajuste */
+        width: 100px; /* Ajuste */
+    }
+
+    .header-center h1 {
+        font-size: 34px; /* Ajuste */
+    }
+
+    .profile-picture {
+        width: 50px; /* Ajuste */
+        height: 50px; /* Ajuste */
+    }
+
+    .menu-dropdown {
+        min-width: 180px; /* Ajuste */
+    }
+
+    .menu-item {
+        font-size: 16px; /* Ajuste */
+        padding: 14px 20px; /* Ajuste */
+    }
+
+    main {
+        margin-top: 110px; /* Ajuste */
+    }
+
+    .profile-content {
+        margin: 40px auto; /* Ajuste */
+        max-width: 600px; /* Ajuste */
+        padding: 35px; /* Ajuste */
+    }
+
+    .profile-picture-main {
+        width: 160px; /* Ajuste */
+        height: 160px; /* Ajuste */
+    }
+
+    .profile-details-main h1 {
+        font-size: 36px; /* Ajuste */
+    }
+
+    .profile-details-main p {
+        font-size: 18px; /* Ajuste */
+    }
+
+    .profile-actions-main {
+        gap: 20px; /* Ajuste */
+        margin-top: 30px; /* Ajuste */
+    }
+
+    .action-button {
+        padding: 12px 28px; /* Ajuste */
+        font-size: 16px; /* Ajuste */
+    }
+
+    .edit-profile-main {
+        margin-top: 30px; /* Ajuste */
+        font-size: 18px; /* Ajuste */
+    }
+
+    .edit-profile-main i {
+        font-size: 24px; /* Ajuste */
+    }
+
+    main h2 {
+        font-size: 30px; /* Ajuste */
+        margin: 50px 0 25px 30px; /* Ajuste */
+    }
+
+    .publications-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajuste */
+        gap: 30px; /* Ajuste */
+        padding: 0 30px 30px 30px; /* Ajuste */
+    }
+
+    .publication {
+        height: 380px; /* Ajuste */
+    }
+
+    .publication img {
+        height: 220px; /* Ajuste */
+    }
+
+    .publication-info h3 {
+        font-size: 19px; /* Ajuste */
+    }
+
+    .publication-info p {
+        font-size: 16px; /* Ajuste */
+    }
+}
+
+/* Para telas de MacBooks e Ultra-Wides (>= 1440px) */
+@media screen and (min-width: 1440px) {
+    header {
+        width: calc(100% - 80px); /* Ajuste */
+        padding: 15px 40px; /* Ajuste */
+        height: 110px; /* Ajuste */
+    }
+
+    .header-left .logo {
+        height: 110px; /* Ajuste */
+        width: 110px; /* Ajuste */
+    }
+
+    .header-center h1 {
+        font-size: 38px; /* Ajuste */
+    }
+
+    .profile-picture {
+        width: 60px; /* Ajuste */
+        height: 60px; /* Ajuste */
+    }
+
+    .menu-dropdown {
+        min-width: 200px; /* Ajuste */
+    }
+
+    .menu-item {
+        font-size: 17px; /* Ajuste */
+        padding: 16px 25px; /* Ajuste */
+    }
+
+    main {
+        margin-top: 130px; /* Ajuste */
+    }
+
+    .profile-content {
+        margin: 50px auto; /* Ajuste */
+        max-width: 700px; /* Ajuste */
+        padding: 40px; /* Ajuste */
+    }
+
+    .profile-picture-main {
+        width: 180px; /* Ajuste */
+        height: 180px; /* Ajuste */
+    }
+
+    .profile-details-main h1 {
+        font-size: 40px; /* Ajuste */
+    }
+
+    .profile-details-main p {
+        font-size: 19px; /* Ajuste */
+    }
+
+    .profile-actions-main {
+        gap: 25px; /* Ajuste */
+        margin-top: 35px; /* Ajuste */
+    }
+
+    .action-button {
+        padding: 14px 32px; /* Ajuste */
+        font-size: 17px; /* Ajuste */
+    }
+
+    .edit-profile-main {
+        margin-top: 35px; /* Ajuste */
+        font-size: 19px; /* Ajuste */
+    }
+
+    .edit-profile-main i {
+        font-size: 26px; /* Ajuste */
+    }
+
+    main h2 {
+        font-size: 34px; /* Ajuste */
+        margin: 60px 0 30px 40px; /* Ajuste */
+    }
+
+    .publications-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Ajuste */
+        gap: 35px; /* Ajuste */
+        padding: 0 40px 40px 40px; /* Ajuste */
+    }
+
+    .publication {
+        height: 420px; /* Ajuste */
+    }
+
+    .publication img {
+        height: 250px; /* Ajuste */
+    }
+
+    .publication-info h3 {
+        font-size: 20px; /* Ajuste */
+    }
+
+    .publication-info p {
+        font-size: 17px; /* Ajuste */
+    }
+}

@@ -270,13 +270,13 @@ main h2 {
 }
 
 /* ======= Modal de Logout ======= */
-.modal-content.logout-modal-content { /* Classe específica para o modal de logout */
+.logout-modal-content { /* Classe específica para o modal de logout */
     width: 320px;
     text-align: center;
     padding: 30px;
 }
 
-.modal-content.logout-modal-content p {
+.logout-modal-content p {
     font-size: 18px;
     margin-bottom: 25px;
     color: #444;
@@ -318,7 +318,7 @@ main h2 {
 }
 
 /* ======= Modal de Detalhes da Receita ======= */
-.modal-content.recipe-detail-content {
+.recipe-detail-content {
     max-width: 700px; /* Tamanho padrão para telas menores/médias */
     width: 90%; /* Ocupa 90% da largura disponível */
     padding: 30px;
@@ -486,7 +486,7 @@ main h2 {
     }
 
     /* Modal de Detalhes */
-    .modal-content.recipe-detail-content {
+    .recipe-detail-content {
         max-width: 800px;
         padding: 40px;
     }
@@ -592,7 +592,7 @@ main h2 {
     }
 
     /* Modal de Detalhes */
-    .modal-content.recipe-detail-content {
+    .recipe-detail-content {
         max-width: 900px;
         padding: 50px;
     }
@@ -698,7 +698,7 @@ main h2 {
     }
 
     /* Modal de Detalhes */
-    .modal-content.recipe-detail-content {
+    .recipe-detail-content {
         max-width: 1000px;
         padding: 60px;
     }

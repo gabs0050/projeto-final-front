@@ -11,29 +11,60 @@
 </head>
 <body>
     <header>
-        <div class="profile-header">
-            <div class="profile-info">
-                <img src="../src/img/low-profile.webp" alt="Foto de Perfil" class="profile-picture">
-                <div class="profile-details">
-                    <h1></h1> <!-- Nome do usuário será inserido aqui -->
-                    <p></p>   <!-- E-mail do usuário será inserido aqui -->
-                </div>
+        <div class="header-left">
+            <img src="../src/img/imgLogo.jpg" alt="Logo do Receitas Deliciosas" class="logo">
+        </div>
+        <div class="header-center">
+            <h1>Perfil</h1> </div>
+        <div class="header-right">
+            <img src="../src/img/low-profile.webp" alt="Foto de Perfil do Usuário" class="profile-picture" id="menuButton">
+            <div class="menu-dropdown" id="menuDropdown">
+                <a href="../src/perfil.html" class="menu-item">
+                    <i class="fas fa-user"></i> Perfil
+                </a>
+                <a href="../src/configurarPerfil.html" class="menu-item">
+                    <i class="fas fa-user-edit"></i> Editar Usuário
+                </a>
+                <a href="../src/publicarReceita.html" class="menu-item">
+                    <i class="fas fa-paper-plane"></i> Publicar Receita
+                </a>
+                <a href="../index.html" class="menu-item" id="logoutLink">
+                    <i class="fas fa-sign-out-alt"></i> Sair da conta
+                </a>
             </div>
-            <div class="profile-actions">
+        </div>
+    </header>
+
+    <main>
+        <section class="profile-content">
+            <div class="profile-info-main">
+                <img src="../src/img/low-profile.webp" alt="Foto de Perfil" class="profile-picture-main">
+                <div class="profile-details-main">
+                    <h1></h1> <p></p>   </div>
+            </div>
+            <div class="profile-actions-main">
                 <button class="action-button">RECEITAS SALVAS</button>
                 <button class="action-button">DICAS PUBLICADAS</button>
                 <button class="action-button">PUBLICAR</button>
             </div>
-            <a href="../src/configurarPerfil.html" class="edit-profile">
+            <a href="../src/configurarPerfil.html" class="edit-profile-main">
                 <i class="fas fa-cog"></i> Editar Perfil
             </a>
-        </div>
-    </header>
-    <main>
+        </section>
+
         <h2>MINHAS PUBLICAÇÕES</h2>
         <div class="publications-grid">
-            <!-- Os cards serão preenchidos dinamicamente pelo JavaScript -->
-        </div>
+            </div>
     </main>
+
+    <div id="logoutModal" class="modal">
+        <div class="modal-content logout-modal-content">
+            <p>Tem certeza que deseja sair da sua conta?</p>
+            <div class="modal-buttons">
+                <button id="confirmLogout" class="modal-button confirm">Sair</button>
+                <button id="cancelLogout" class="modal-button cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
